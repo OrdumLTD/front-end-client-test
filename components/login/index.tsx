@@ -4,28 +4,23 @@ import { useContext } from "react";
 import UserContext from "@/store/userContext";
 
 const LogIn = () => {
-
   const userCtx = useContext(UserContext);
- 
 
   const logInTest = () => {
-     userCtx.logInUser("Test User");
+    userCtx.logInUser("Test User");
   };
 
   return (
     <div className="font-space-grotesk grid h-screen place-items-center">
       <div className="flex flex-col">
         <h1 className="md:text-5xl mb-10">Log in of sign up</h1>
-
-        <button className="border border-gray-400 hover:bg-gray-200 py-2.5" onClick={logInTest}>
+        <button
+          className="border border-gray-400 hover:bg-gray-200 py-2.5"
+          onClick={logInTest}
+        >
           Log in (test)
-        </button>
+        </button>{" "}
         <div className="my-1 md:my-2"></div>
-        <button className="border border-gray-400 hover:bg-gray-200 py-2.5" onClick={logInTest}>
-          Log in
-        </button>
-        <div className="my-1 md:my-2"></div>
-
         <button className="border border-gray-400 hover:bg-gray-200 py-2.5">
           <Link href="/signup">Sign up</Link>
         </button>

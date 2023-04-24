@@ -18,7 +18,7 @@ const SubmitPropolsalSidePanel: React.FC<Props> = (props) => {
 
   const changePropolsalSubPage = async (step: number, route: string) => {
     changeStep(step);
-    router.push(route);
+   await router.push(route);
   };
 
   const step = submitCtx.propolsalStep;
@@ -47,8 +47,7 @@ const SubmitPropolsalSidePanel: React.FC<Props> = (props) => {
               (step === 2 ? "font-bold" : "")
             }
             onClick={() => {
-              changeStep(2);
-              router.push("/submitproposal/context");
+                changePropolsalSubPage(2, "/submitproposal/context");
             }}
           >
             2. Context

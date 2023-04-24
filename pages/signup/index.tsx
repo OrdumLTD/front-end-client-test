@@ -1,6 +1,3 @@
-// import { useSelector, useDispatch } from "react-redux";
-// import { RootState } from "../../redux/store";
-// import { logInTestUser } from "../../redux/userSlice"
 import Link from "next/link";
 
 const SignUp = () => {
@@ -17,7 +14,7 @@ const SignUp = () => {
 
         <Link href="signup/signupwallet"><button className="w-60 border border-gray-400 hover:bg-gray-200 py-2.5">Wallet</button></Link>
         <div className="my-1 md:my-2"></div>
-        <Link href="/createProfile"><button className="w-60 border border-gray-400 hover:bg-gray-200 py-2.5">Email</button></Link>
+        <Link href="/createteamprofile"><button className="w-60 border border-gray-400 hover:bg-gray-200 py-2.5">Email</button></Link>
         <div className="my-1 md:my-2"></div>
       </div>
     </div>

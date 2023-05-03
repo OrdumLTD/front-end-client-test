@@ -1,75 +1,78 @@
-import { useState } from 'react';
-import {
-  web3Accounts,
-  web3Enable
-} from '@polkadot/extension-dapp';
+import { useState, useContext } from "react";
+import { web3Accounts, web3Enable } from "@polkadot/extension-dapp";
 
-import { InjectedAccountWithMeta } from '@polkadot/extension-inject/types';
+import WalletContext from "@/store/walletContext";
+
+import { InjectedAccountWithMeta } from "@polkadot/extension-inject/types";
 
 type TExtensionState = {
-  data?: {
-    accounts: InjectedAccountWithMeta[],
-    defaultAccount: InjectedAccountWithMeta,
-  }
-  loading: boolean
-  error: null | Error
-}
+  loading: boolean;
+  error: null | Error;
+  data?: InjectedAccountWithMeta[];
+};
 
 const initialExtensionState: TExtensionState = {
-  data: undefined,
   loading: false,
-  error: null
+  error: null,
+  data: undefined,
 };
 
 export const Connect = () => {
   const [state, setState] = useState(initialExtensionState);
 
-  const handleConnect = () => {
+  const handleConnect = async() => {
     setState({ ...initialExtensionState, loading: true });
 
-    web3Enable('Ordum')
+    web3Enable("Ordum")
       .then((injectedExtensions) => {
         if (!injectedExtensions.length) {
-          return Promise.reject(new Error('NO_INJECTED_EXTENSIONS'));
+          return Promise.reject(new Error("NO_WALLET_DETECTED"));
         }
-        return web3Accounts();
-      })
-      .then((accounts) => {
-        if (!accounts.length) {
-          return Promise.reject(new Error('NO_ACCOUNTS'));
-        }
-
-        setState({
-          error: null,
-          loading: false,
-          data: {
-            accounts: accounts,
-            defaultAccount: accounts[ 0 ],
-          }
-        });
-      })
-      .catch((error) => {
-        console.error('Error with connect', error);
-        setState({ error, loading: false, data: undefined });
+      }).catch((error) => {
+        console.error("Error with connect", error);
+        setState({ error, loading: false });
       });
+    
+      const allAccounts:InjectedAccountWithMeta[] | undefined = await web3Accounts()
+                       
+      setState({
+        loading: false,
+        error:null,
+        data: allAccounts
+      })
   };
+
+  // Call the context here and pass allAccounts
+  const walletCtx = useContext(WalletContext);
+  // Updating the wallet_context state
+  walletCtx.getAllAccounts(state.data);
 
   if (state.error) {
     return (
       <span className="text-red-500 font-bold tracking-tight">
-        Error with connect: {state.error.message}
+        Error connect: {state.error.message}
       </span>
     );
   }
 
-  return state.data
-    ? <>Hello, {state.data.defaultAccount.meta.name}</>
-    : <button
-      disabled={state.loading}
-      onClick={handleConnect}
-    >
-      {state.loading ? 'Connecting...' : 'Connect'}
-    </button>;
+  return state.data ? (
+    <div className="flex flex-col">
+      <span>Choose account</span>
+ 
+      <select>
+        {walletCtx.accounts?.map(account =>(
+          <option key={account.address}
+          onClick={() => {walletCtx.selectAccount(account)}}>
+            {account.meta.name}</option>
+        ))}
+      </select>
+      <button className=" mt-2 border border-black p-0.5">Use this account</button>
+    </div>
+  ) : (
+    <button disabled={state.loading} onClick={handleConnect}>
+      {state.loading ? "Connecting..." : "Connect"}
+    </button>
+  );
 };
 
 function beatifyAddress(address: string) {

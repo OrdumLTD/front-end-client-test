@@ -10,6 +10,11 @@
   },
   "dependencies": {
     "@next/font": "^13.3.0",
+    "@polkadot/api": "^9.13.4",
+    "@polkadot/api-augment": "^10.5.1",
+    "@polkadot/api-contract": "^9.13.4",
+    "@polkadot/extension-dapp": "^0.46.2",
+    "@polkadot/types-augment": "^10.5.1",
     "@types/node": "18.15.11",
     "@types/react": "18.0.35",
     "@types/react-dom": "18.0.11",
@@ -28,8 +33,6 @@
   "devDependencies": {
     "@727-ventures/typechain-compiler": "^0.5.16",
     "@727-ventures/typechain-types": "^0.0.22",
-    "@polkadot/api": "^9.13.4",
-    "@polkadot/api-contract": "^9.13.4",
     "@polkadot/keyring": "^10.4.2",
     "@types/bn.js": "^5.1.0",
     "ts-node": "^10.7.0"

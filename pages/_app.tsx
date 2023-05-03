@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { UserContextProvider } from "../store/userContext";
 import { PropolsalContextProvider } from "@/store/submitPropolsal";
+import { ChainAPIContextProvider } from "@/store/apiContext";
 
 import { Space_Grotesk, Inter } from "@next/font/google";
 
@@ -13,9 +14,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <UserContextProvider>
       <PropolsalContextProvider>
+        <ChainAPIContextProvider>
         <main className={spaceGrotesk.className}>
           <Component {...pageProps} />
         </main>
+        </ChainAPIContextProvider>
       </PropolsalContextProvider>
     </UserContextProvider>
   );

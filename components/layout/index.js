@@ -2,6 +2,7 @@ import Header from "./header";
 import Sidebar from "./sidebar";
 
 export default function Layout(props) {
+  
   return (
     <main className="flex flex-col h-screen ">
       <div className="flex flex-1 overflow-hidden">

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 
 import Sidebar from "../components/ui/sidebar";
@@ -18,6 +18,7 @@ export default function Home() {
   // }
 
   return userCtx.userLogged ? (
+ 
     <Layout>
     </Layout>
   ) : (

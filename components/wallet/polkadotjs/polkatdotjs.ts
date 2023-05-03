@@ -7,7 +7,7 @@ import type { InjectedAccountWithMeta } from "@polkadot/extension-inject/types";
 // Checking if extensaion is intalled
 
 let enablePolkadotExtensionCache: Promise<void>;
-export const enablePolkadotExtension = async (): Promise<void> => {
+ const enablePolkadotExtension = async (): Promise<void> => {
   if (enablePolkadotExtensionCache) return enablePolkadotExtensionCache;
 
   enablePolkadotExtensionCache = (async () => {
@@ -20,7 +20,7 @@ export const enablePolkadotExtension = async (): Promise<void> => {
     }
   })();
 
-  return enablePolkadotExtensionCache;
+  return  ;
 };
 
-
+export default enablePolkadotExtension

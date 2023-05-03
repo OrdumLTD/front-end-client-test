@@ -10,7 +10,17 @@ import SubmitPropolsalSidePanel from "@/components/submitProposal/sidePanel";
 const submitProposalIndex = () => {
   // const { user } = useSelector((state: RootState) => state.user);
   // const dispatch = useDispatch()
+  //---------------------------------------------------------
 
+    //1.  When it renders we connect to the API;
+    //2. Store the api instance to the contextApi
+
+
+
+
+
+
+  //---------------------------------------------------------
   // const logInTest = () => {
   //   dispatch(logInTestUser())
   // }

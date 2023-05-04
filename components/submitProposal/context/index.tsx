@@ -28,7 +28,7 @@ const SubmitProposalContext: React.FC<Props> = (props) => {
 
         <h2 className="mt-8 text-4xl">2. Context of the Propolsal</h2>
 
-        <form className="mt-4">
+        <div className="mt-4">
           <label className="mt-4 text-xs md:text-sm flex">
             <span>
               How did the proposal come to the proponent&apos;s mind? Feel free
@@ -129,7 +129,7 @@ WIP ~ would be good to add example text here from a previous proposal.
               Back
             </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

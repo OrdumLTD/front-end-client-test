@@ -12,8 +12,10 @@ type Props = {
 };
 
 const SubmitProposalTLDR: React.FC<Props> = (props) => {
-
   const submitCtx = useContext(SubmitPropolsalContext);
+  const tldrCtx = { ...submitCtx.tldr };
+  console.log(tldrCtx)
+  const handleTLDRchange = submitCtx.changeTLDR;
   const router = useRouter();
   const step = submitCtx.propolsalStep;
   const changeStep = submitCtx.changeToStep;
@@ -43,7 +45,7 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
 
         <h2 className="mt-8 text-4xl">TL;DR</h2>
 
-        <form className="mt-8">
+        <div className="mt-8">
           <div className="flex justify-between">
             <label className="text-xl flex">
               <span>Choose Proposer Account </span>
@@ -52,15 +54,17 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
             <span>Transfarable 00.00</span>
           </div>
           <select
+            onChange={(e) => {
+              const selected = e.target.value;
+              (handleTLDRchange({accountType: selected}));
+            }}
             className="mt-2  text-gray-500
             w-[33rem] pl-2  md:py-2 border border-black rounded-md text-xs md:text-sm shadow-sm bg-white focus:outline-none focus:border-sky-500"
           >
             <option value="" className="" disabled hidden>
               All
             </option>
-            <option value="All">
-              Ordum
-            </option>
+            <option value="Ordum">Ordum</option>
             <option value="Option 1">Option 2</option>
             <option value="Option 2">Option 3</option>
           </select>
@@ -75,17 +79,27 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
             <span>Project Type </span>
           </label>
           <select
+           onChange={(e) => {
+            const selected = e.target.value;
+            (handleTLDRchange({projectType: selected}));
+          }}
             className="mt-2  text-gray-500
             w-[33rem] pl-2  md:py-2 border border-black rounded-md text-xs md:text-sm shadow-sm bg-white focus:outline-none focus:border-sky-500"
           >
             <option value="" className="" disabled hidden>
               All
             </option>
-            <option value="All">
-              <div className="border rounded bg-black" /> Govenance
-            </option>
-            <option value="Option 1">Option 2</option>
-            <option value="Option 2">Option 3</option>
+            <option value="Governance">Governance</option>
+            <option value="Defi">Defi</option>
+            <option value="Communication">Communication</option>
+            <option value="Privacy">Privacy</option>
+            <option value="Education">Education</option>
+            <option value="Events">Events</option>
+            <option value="Infrastracture">Infrastracture</option>
+            <option value="Art">Art</option>
+            <option value="Media">Media</option>
+            <option value="NFT">NFT</option>
+            <option value="Other">Other</option>
           </select>
 
           <label className="mt-4 text-xl flex">
@@ -109,7 +123,12 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
           <input
             className="mt-2 text-gray-500  w-[33rem] text-xs md:text-sm bg-white border border-black rounded pl-2  md:py-2 focus:outline-none"
             placeholder="Email"
-            type="text"
+            autoComplete="off"
+            type="email"
+            value={tldrCtx.contact}
+            onChange={(e) => {
+              handleTLDRchange({ contact: e.target.value });
+            }}
           />
 
           <label className="mt-4 text-xl flex">
@@ -118,6 +137,10 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
           <input
             className="mt-2 text-gray-500  w-[33rem] text-xs md:text-sm bg-white border border-black rounded pl-2  md:py-2 focus:outline-none"
             placeholder="Name your propolsal"
+            value={tldrCtx.propolsalName}
+            onChange={(e) => {
+              handleTLDRchange({ propolsalName: e.target.value });
+            }}
             type="text"
           />
 
@@ -127,6 +150,10 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
           <input
             className="mt-2 text-gray-500  w-[33rem] text-xs md:text-sm bg-white border border-black rounded pl-2  md:py-2 focus:outline-none"
             placeholder="DD/MM/YY"
+            value={tldrCtx.date}
+            onChange={(e) => {
+              handleTLDRchange({ date: e.target.value });
+            }}
             type="text"
           />
 
@@ -137,6 +164,10 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
             <input
               className="text-gray-500 w-[23rem] text-xs md:text-sm bg-white border border-black rounded pl-2  md:py-2 focus:outline-none"
               placeholder="KSM"
+              value={tldrCtx.fundingAmount}
+              onChange={(e) => {
+                handleTLDRchange({ fundingAmount: e.target.value });
+              }}
               type="text"
             />
             <button className="bg-black text-white border rounded px-10">
@@ -150,6 +181,10 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
           <input
             className="mt-2 text-gray-500  w-[33rem] text-xs md:text-sm bg-white border border-black rounded pl-2  md:py-2 focus:outline-none"
             placeholder="Eg. 4 months"
+            value={tldrCtx.duration}
+            onChange={(e) => {
+              handleTLDRchange({ duration: e.target.value });
+            }}
             type="text"
           />
 
@@ -158,6 +193,10 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
           </label>
           {/* ToDo fix line break for plaeholder */}
           <textarea
+           value={tldrCtx.shortDescription}
+           onChange={(e) => {
+             handleTLDRchange({ shortDescription: e.target.value });
+           }}
             className="mt-2 w-full text-sm bg-white placeholder:font-italitc border border-black rounded py-2 pl-2 pr-4 focus:outline-none resize-none min-h-[10rem]"
             placeholder="Describe your project in a few sentences. Max XXXX characters.&#10; 
             Suggested format:&#10; 
@@ -178,6 +217,10 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
           </label>
           {/* ToDo fix line break for plaeholder */}
           <textarea
+           value={tldrCtx.whyDifferentDescription}
+           onChange={(e) => {
+             handleTLDRchange({ whyDifferentDescription: e.target.value });
+           }}
             className="mt-2 w-full text-sm bg-white placeholder:font-italitc border border-black rounded py-2 pl-2 pr-4 focus:outline-none resize-none min-h-[10rem]"
             placeholder="Are there any similar or competing projects in the ecosystem or outside of it? If so, how is yours different. "
           />
@@ -187,6 +230,10 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
           </label>
           <div className="mt-2 flex flex-row justify-between">
             <input
+              value={tldrCtx.externalLinks}
+              onChange={(e) => {
+                handleTLDRchange({ externalLinks: e.target.value });
+              }}
               className="text-gray-500 w-[23rem] text-xs md:text-sm bg-white border border-black rounded pl-2  md:py-2 focus:outline-none"
               placeholder="eg Gihub, Figma"
               type="text"
@@ -196,25 +243,30 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
             </button>
           </div>
 
-
           {/* Button Row - take one level up */}
           <div className="mt-10 flex flex-col gap-4">
-            <button className="bg-black text-white py-2 md:py-4"
-            onClick={()=> changePropolsalSubPage(2, "/submitproposal/context")}>
+            <button
+              className="bg-black text-white py-2 md:py-4"
+              onClick={() =>
+                changePropolsalSubPage(2, "/submitproposal/context")
+              }
+            >
               Save and continue
             </button>
-            <button className="bg-black text-white py-2 md:py-4"
-            onClick={()=> changePropolsalSubPage(1, "/")}>
+            <button
+              className="bg-black text-white py-2 md:py-4"
+              onClick={() => changePropolsalSubPage(1, "/")}
+            >
               Save draft and Close
             </button>
-            <button className="bg-gray-400 text-white py-2 md:py-4"
-            onClick={()=> changePropolsalSubPage(1, "/")}>
+            <button
+              className="bg-gray-400 text-white py-2 md:py-4"
+              onClick={() => changePropolsalSubPage(1, "/")}
+            >
               Back
             </button>
           </div>
-
-
-        </form>
+        </div>
       </div>
     </div>
   );

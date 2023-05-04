@@ -26,7 +26,7 @@ const SubmitPropolsalTeam: React.FC<Props> = (props) => {
 
         <h2 className="mt-8 text-4xl">4. Team Members</h2>
 
-        <form className="mt-4">
+        <div className="mt-4">
           <label className="mt-4 text-xl flex">
             <span>Name</span>
           </label>
@@ -101,7 +101,7 @@ const SubmitPropolsalTeam: React.FC<Props> = (props) => {
               Back
             </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

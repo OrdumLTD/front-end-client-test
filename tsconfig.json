@@ -18,6 +18,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "store/userContext.js", "components/layout/index.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "store/userContext.js", "components/layout/index.js", "store/submitPropolsal.js"],
   "exclude": ["node_modules"]
 }

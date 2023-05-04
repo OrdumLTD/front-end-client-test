@@ -35,7 +35,7 @@ const SubmitPropolsalMilestones: React.FC<Props> = (props) => {
           item in the list should include a link to the deliverable itself:
         </p>
 
-        <form className="mt-4">
+        <div className="mt-4">
           <label className="mt-4 text-xl flex">
             <span>Milestone Name</span>
           </label>
@@ -171,7 +171,7 @@ const SubmitPropolsalMilestones: React.FC<Props> = (props) => {
               Back
             </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

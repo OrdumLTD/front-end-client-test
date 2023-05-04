@@ -1,5 +1,4 @@
-import { createContext, useState } from "react";
-
+import { createContext, use, useState } from "react";
 
 const PropolsalContext = createContext({
   //   Propolsal Menu
@@ -15,42 +14,54 @@ const PropolsalContext = createContext({
     date: "",
     fundingAmount: "",
     exchangeRate: "",
-    durationL: "",
+    duration: "",
     shortDescription: "",
     whyDifferentDescription: "",
     externalLinks: "",
   },
-  changeTLDR: function ({}) {},
-  //Context o the Propolsal
-  contextOfthePropolsal: {}
-  // logOut: function () {},
-  // userInfo: null, // {type(Organisation/indiviual), applicant(or Foundation) ,name, about, projectCategory, mission, links{}, teamMembers[]},
-  // showUserInfo: function() {}
+  changeTLDR: function (arg) {},
+  contextOfthePropolsal: {},
 });
 
-const TLDR = () => {};
-
 export function PropolsalContextProvider(props) {
-//   const [userLoggedIn, setUserLoggedIn] = useState(false);
-//   const [userName, setUserName] = useState("Jack");
 
- const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
+  const [tldr, setTldr] = useState({
+    accountType: "Ordum",
+    projectType: "Governance",
+    track: "",
+    contact: "",
+    propolsalName: "",
+    date: "",
+    fundingAmount: "",
+    exchangeRate: "",
+    duration: "",
+    shortDescription: "",
+    whyDifferentDescription: "",
+    externalLinks: "",
+  });
 
- function changeStepHandler(num) {
-    setStep(num)
- }
+  const changeTLDR = (itemToChange) => {
+    setTldr({...tldr, ...itemToChange})
+  }
+
+  function changeStepHandler(num) {
+    setStep(num);
+  }
 
   const context = {
     propolsalStep: step,
-    changeToStep: changeStepHandler
-  }
+    changeToStep: changeStepHandler,
+    tldr: tldr,
+    changeTLDR: changeTLDR
+  };
 
-//   const context = {
-//     userLogged: userLoggedIn,
-//     userName: userName,
-//     logInUser: logInUserHandler,
-//     logOutUser: logOutUserHandler,
-//   };
+  //   const context = {
+  //     userLogged: userLoggedIn,
+  //     userName: userName,
+  //     logInUser: logInUserHandler,
+  //     logOutUser: logOutUserHandler,
+  //   };
 
   return (
     <PropolsalContext.Provider value={context}>

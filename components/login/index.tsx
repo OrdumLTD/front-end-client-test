@@ -1,37 +1,29 @@
 import Link from "next/link";
 
 import React, { useContext, useEffect, useState } from "react";
-import UserContext from "@/store/userContext";
 
-import enablePolkadotExtensionCache from "@/components/wallet/polkadotjs/polkatdotjs";
-import { web3Accounts } from "@polkadot/extension-dapp";
 import type { InjectedAccountWithMeta } from "@polkadot/extension-inject/types";
 import dynamic from "next/dynamic";
 
-
-const Connect = dynamic(() => import('@/components/wallet/polkadotjs/connect').then(m => m.Connect), {
-  ssr: false,
-});
+const Connect = dynamic(
+  () => import("@/components/wallet/polkadotjs/connect").then((m) => m.Connect),
+  {
+    ssr: false,
+  }
+);
 
 const LogIn = () => {
-  const userCtx = useContext(UserContext);
-
-  const logInTest = () => {
-    userCtx.logInUser("Test User");
-  };
 
   // Wallet states
   const [accounts, setAccounts] = useState<InjectedAccountWithMeta[]>();
 
   useEffect(() => {
- 
     // enablePolkadotExtensionCache();
     // const getWallets = async () => {
     //   const allAccounts = await web3Accounts();
     //   setAccounts(allAccounts);
     // };
     // getWallets();
-    
   }, []);
 
   return (
@@ -40,13 +32,8 @@ const LogIn = () => {
         <h1 className="md:text-5xl mb-10">Log in of sign up</h1>
 
         <div className="border py-2 flex flex-col place-items-center gap-4">
-          {/* Is there a PJS isntalled */}
-          {/* Show walles */}
-          {/* Or show "Please install PJS" */}
-          {/* <div className="border px-10 py-2 hover:bg-gray-200">PJS1</div>
-          <div className="border px-10 py-2 hover:bg-gray-200">PJS1</div> */}
-          <div>  
-          <Connect />
+          <div>
+            <Connect />
           </div>
         </div>
 

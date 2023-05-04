@@ -93,7 +93,7 @@ const SubmitPropolsalFeedback: React.FC<Props> = (props) => {
 
           {/* Button Row - take one level up */}
 
-          {/* ToDo Indexing on the menu show Context, even after weswitch to Problem Solution */}\
+          {/* ToDo Indexing on the menu show Context, even after weswitch to Problem Solution */}
           {/* Where to go from here? */}
           <div className="mt-10 flex flex-col gap-4">
             <button

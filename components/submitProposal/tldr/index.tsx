@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { useRouter } from "next/router";
 
 import SubmitPropolsalContext from "@/store/submitPropolsal";
+import WalletContext from "@/store/walletContext";
 
 import infoIcon from "@/assets/svg-icons/info-icon.svg";
 
@@ -12,9 +13,11 @@ type Props = {
 };
 
 const SubmitProposalTLDR: React.FC<Props> = (props) => {
+  const walletCtx = useContext(WalletContext);
+
   const submitCtx = useContext(SubmitPropolsalContext);
   const tldrCtx = { ...submitCtx.tldr };
-  console.log(tldrCtx)
+  console.log(tldrCtx);
   const handleTLDRchange = submitCtx.changeTLDR;
   const router = useRouter();
   const step = submitCtx.propolsalStep;
@@ -48,7 +51,7 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
         <div className="mt-8">
           <div className="flex justify-between">
             <label className="text-xl flex">
-              <span>Choose Proposer Account </span>
+              <span>Choose Benefitioary Account </span>
               <Image src={infoIcon} width={12} alt="" className="-mt-4 mr-2" />
             </label>
             <span>Transfarable 00.00</span>
@@ -56,7 +59,7 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
           <select
             onChange={(e) => {
               const selected = e.target.value;
-              (handleTLDRchange({accountType: selected}));
+              handleTLDRchange({ account: selected });
             }}
             className="mt-2  text-gray-500
             w-[33rem] pl-2  md:py-2 border border-black rounded-md text-xs md:text-sm shadow-sm bg-white focus:outline-none focus:border-sky-500"
@@ -64,7 +67,10 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
             <option value="" className="" disabled hidden>
               All
             </option>
-            <option value="Ordum">Ordum</option>
+
+            <option value="5Fxn69X58NdsFqfaBdsiinaYvwYccBSiv64YRcG2N24bzPPv">
+              5Fxn69X58NdsFqfaBdsiinaYvwYccBSiv64YRcG2N24bzPPv
+            </option>
             <option value="Option 1">Option 2</option>
             <option value="Option 2">Option 3</option>
           </select>
@@ -79,10 +85,10 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
             <span>Project Type </span>
           </label>
           <select
-           onChange={(e) => {
-            const selected = e.target.value;
-            (handleTLDRchange({projectType: selected}));
-          }}
+            onChange={(e) => {
+              const selected = e.target.value;
+              handleTLDRchange({ projectType: selected });
+            }}
             className="mt-2  text-gray-500
             w-[33rem] pl-2  md:py-2 border border-black rounded-md text-xs md:text-sm shadow-sm bg-white focus:outline-none focus:border-sky-500"
           >
@@ -100,21 +106,6 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
             <option value="Media">Media</option>
             <option value="NFT">NFT</option>
             <option value="Other">Other</option>
-          </select>
-
-          <label className="mt-4 text-xl flex">
-            <span>Track</span>
-          </label>
-          <select
-            className="mt-2  text-gray-500
-            w-[33rem] pl-2  md:py-2 border border-black rounded-md text-xs md:text-sm shadow-sm bg-white focus:outline-none focus:border-sky-500"
-          >
-            <option value="" className="" disabled hidden>
-              All
-            </option>
-            <option value="All">{`Eg. Big Spender (>XXXX KSM)`}</option>
-            <option value="Option 1">Option 2</option>
-            <option value="Option 2">Option 3</option>
           </select>
 
           <label className="mt-4 text-xl flex">
@@ -145,38 +136,48 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
           />
 
           <label className="mt-4 text-xl flex">
-            <span>Date</span>
-          </label>
-          <input
-            className="mt-2 text-gray-500  w-[33rem] text-xs md:text-sm bg-white border border-black rounded pl-2  md:py-2 focus:outline-none"
-            placeholder="DD/MM/YY"
-            value={tldrCtx.date}
-            onChange={(e) => {
-              handleTLDRchange({ date: e.target.value });
-            }}
-            type="text"
-          />
-
-          <label className="mt-4 text-xl flex">
             <span>Funding Amount</span>
           </label>
-          <div className="mt-2 flex flex-row justify-between">
+          <div className="mt-2 flex flex-row">
             <input
-              className="text-gray-500 w-[23rem] text-xs md:text-sm bg-white border border-black rounded pl-2  md:py-2 focus:outline-none"
-              placeholder="KSM"
+              className="text-gray-500 w-[33rem] text-xs md:text-sm bg-white border border-black rounded pl-2  md:py-2 focus:outline-none"
+              placeholder="$"
               value={tldrCtx.fundingAmount}
               onChange={(e) => {
                 handleTLDRchange({ fundingAmount: e.target.value });
               }}
               type="text"
             />
-            <button className="bg-black text-white border rounded px-10">
-              Calculate
-            </button>
           </div>
 
           <label className="mt-4 text-xl flex">
-            <span>Duration</span>
+            <span>Recieve Date</span>
+          </label>
+          <input
+            className="mt-2 text-gray-500  w-[33rem] text-xs md:text-sm bg-white border border-black rounded pl-2  md:py-2 focus:outline-none"
+            placeholder="When do you want to recieve the funding?"
+            value={tldrCtx.recieveDate}
+            onChange={(e) => {
+              handleTLDRchange({ recieveDate: e.target.value });
+            }}
+            type="text"
+          />
+
+          <label className="mt-4 text-xl flex">
+            <span>Starting Date</span>
+          </label>
+          <input
+            className="mt-2 text-gray-500  w-[33rem] text-xs md:text-sm bg-white border border-black rounded pl-2  md:py-2 focus:outline-none"
+            placeholder="When do you plan to start your project?"
+            value={tldrCtx.startingDate}
+            onChange={(e) => {
+              handleTLDRchange({ startingDate: e.target.value });
+            }}
+            type="text"
+          />
+
+          <label className="mt-4 text-xl flex">
+            <span>Deadline</span>
           </label>
           <input
             className="mt-2 text-gray-500  w-[33rem] text-xs md:text-sm bg-white border border-black rounded pl-2  md:py-2 focus:outline-none"
@@ -193,10 +194,10 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
           </label>
           {/* ToDo fix line break for plaeholder */}
           <textarea
-           value={tldrCtx.shortDescription}
-           onChange={(e) => {
-             handleTLDRchange({ shortDescription: e.target.value });
-           }}
+            value={tldrCtx.shortDescription}
+            onChange={(e) => {
+              handleTLDRchange({ shortDescription: e.target.value });
+            }}
             className="mt-2 w-full text-sm bg-white placeholder:font-italitc border border-black rounded py-2 pl-2 pr-4 focus:outline-none resize-none min-h-[10rem]"
             placeholder="Describe your project in a few sentences. Max XXXX characters.&#10; 
             Suggested format:&#10; 
@@ -217,10 +218,10 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
           </label>
           {/* ToDo fix line break for plaeholder */}
           <textarea
-           value={tldrCtx.whyDifferentDescription}
-           onChange={(e) => {
-             handleTLDRchange({ whyDifferentDescription: e.target.value });
-           }}
+            value={tldrCtx.whyDifferentDescription}
+            onChange={(e) => {
+              handleTLDRchange({ whyDifferentDescription: e.target.value });
+            }}
             className="mt-2 w-full text-sm bg-white placeholder:font-italitc border border-black rounded py-2 pl-2 pr-4 focus:outline-none resize-none min-h-[10rem]"
             placeholder="Are there any similar or competing projects in the ecosystem or outside of it? If so, how is yours different. "
           />

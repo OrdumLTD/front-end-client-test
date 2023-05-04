@@ -154,7 +154,7 @@ const SubmitPropolsalMilestones: React.FC<Props> = (props) => {
               Save and continue
             </button>
             <button className="bg-black text-white py-2 md:py-4">
-              Add Another stone
+              Add Another milestone
             </button>
             <button
               className="bg-black text-white py-2 md:py-4"

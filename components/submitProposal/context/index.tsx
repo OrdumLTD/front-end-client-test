@@ -5,24 +5,24 @@ import { useRouter } from "next/router";
 
 import SubmitPropolsalContext from "@/store/submitPropolsal";
 
-import infoIcon from "@/assets/svg-icons/info-icon.svg";
-
 type Props = {
   className?: string;
 };
 
 const SubmitProposalContext: React.FC<Props> = (props) => {
   const submitCtx = useContext(SubmitPropolsalContext);
+  const contextCtx = submitCtx.context;
+  const handleSubmitCtxChange = submitCtx.changeContext;
   const router = useRouter();
   const changeStep = submitCtx.changeToStep;
 
   const changePropolsalSubPage = async (step: number, route: string) => {
     changeStep(step);
-   router.push(route);
+    router.push(route);
   };
 
   return (
-    <div className="p-10">
+    <div className="xl:ml-48 2xl:ml-60 p-10">
       <div className="max-w-[33rem] flex flex-col">
         <h1 className="text-4xl xl:text-6xl font-medium">Submit Proposal</h1>
 
@@ -39,11 +39,14 @@ const SubmitProposalContext: React.FC<Props> = (props) => {
           <textarea
             className="mt-2 w-full text-sm bg-white placeholder:font-italitc border border-black rounded py-2 pl-2 pr-4 focus:outline-none resize-none min-h-[10rem]"
             placeholder="Which problems did you encounter? What inspired you to create this proposal and initiate your project? Did you have any discussions with community members so far? What are their opinions on the matter? 
-
 WIP ~ would be good to add example text here from a previous proposal. 
 
 
 --> enable image upload, and decide on editing tools "
+            value={contextCtx.howDidItComeToMind}
+            onChange={(e) => {
+              handleSubmitCtxChange({ howDidItComeToMind: e.target.value });
+            }}
           />
 
           <label className="mt-4 text-xl flex">
@@ -56,6 +59,10 @@ WIP ~ would be good to add example text here from a previous proposal.
 
 
             --> enable image upload, and decide on editing tools "
+            value={contextCtx.howDoesItHelp}
+            onChange={(e) => {
+              handleSubmitCtxChange({ howDoesItHelp: e.target.value });
+            }}
           />
           <label className="mt-4 text-xl flex">
             <span>What is your goal?</span>
@@ -64,6 +71,10 @@ WIP ~ would be good to add example text here from a previous proposal.
           <textarea
             className="mt-2 w-full text-sm bg-white placeholder:font-italitc border border-black rounded py-2 pl-2 pr-4 focus:outline-none resize-none min-h-[10rem]"
             placeholder="How does success look like?"
+            value={contextCtx.goal}
+            onChange={(e) => {
+              handleSubmitCtxChange({ goal: e.target.value });
+            }}
           />
 
           <label className="mt-4 text-xl flex">
@@ -73,6 +84,10 @@ WIP ~ would be good to add example text here from a previous proposal.
           <textarea
             className="mt-2 w-full text-sm bg-white placeholder:font-italitc border border-black rounded py-2 pl-2 pr-4 focus:outline-none resize-none min-h-[10rem]"
             placeholder="Why did you choose to build in Kusama? What is it about this network that encourages you to submit this proposal? "
+            value={contextCtx.whyKSM}
+            onChange={(e) => {
+              handleSubmitCtxChange({ whyKSM: e.target.value });
+            }}
           />
 
           <div className="mt-4">
@@ -112,8 +127,10 @@ WIP ~ would be good to add example text here from a previous proposal.
           <div className="mt-10 flex flex-col gap-4">
             <button
               className="bg-black text-white py-2 md:py-4"
-              onClick={()=> changePropolsalSubPage(3, "/submitproposal/problem-solution")}>
-
+              onClick={() =>
+                changePropolsalSubPage(3, "/submitproposal/problem-solution")
+              }
+            >
               Save and continue
             </button>
             <button

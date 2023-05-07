@@ -144,14 +144,14 @@ const SubmitPropolsalMilestones: React.FC<Props> = (props) => {
           {/* Button Row - take one level up */}
 
           {/* ToDo Indexing on the menu show Context, even after weswitch to Problem Solution */}
-          <div className="mt-10 flex flex-col gap-4">
+          <div className="xl:ml-48 2xl:ml-60 flex flex-col gap-4">
             <button
               className="bg-black text-white py-2 md:py-4"
               onClick={() =>
-                changePropolsalSubPage(5, "/submitproposal/report")
+                changePropolsalSubPage(5, "/submitproposal/preview")
               }
             >
-              Save and continue
+              Priview
             </button>
             <button className="bg-black text-white py-2 md:py-4">
               Add Another milestone

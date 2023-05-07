@@ -60,3 +60,9 @@ const convertToBlockNumber = (date: string) =>{
     // return the blocknumber  
     return blocks
 }
+
+const sumbitPropolsalToBC = () =>{
+    return null
+}
+
+export default sumbitPropolsalToBC

@@ -11,7 +11,7 @@ const PropolsalContext = createContext({
     track: "",
     contact: "",
     propolsalName: "",
-    recieveDate:"",
+    recieveDate: "",
     startingDate: "",
     fundingAmount: "",
     exchangeRate: 30,
@@ -21,14 +21,18 @@ const PropolsalContext = createContext({
     externalLinks: "",
   },
   context: {
-
+    howDidItComeToMind: "",
+    howDoesItHelp: "",
+    goal: "",
+    whyKSM: "",
   },
+  problemSolution: {},
   changeTLDR: function (arg) {},
+  changeContext: function (arg) {},
   contextOfthePropolsal: {},
 });
 
 export function PropolsalContextProvider(props) {
-
   const [step, setStep] = useState(1);
   const [tldr, setTldr] = useState({
     acount: "5Fxn69X58NdsFqfaBdsiinaYvwYccBSiv64YRcG2N24bzPPv",
@@ -46,9 +50,20 @@ export function PropolsalContextProvider(props) {
     externalLinks: "",
   });
 
+  const [propolsalContext, setPropolsalContext] = useState({
+    howDidItComeToMind: "",
+    howDoesItHelp: "",
+    goal: "",
+    whyKSM: "",
+  });
+
   const changeTLDR = (itemToChange) => {
-    setTldr({...tldr, ...itemToChange})
-  }
+    setTldr({ ...tldr, ...itemToChange });
+  };
+
+  const changeContext = (itemToChange) => {
+    setPropolsalContext({ ...propolsalContext, ...itemToChange });
+  };
 
   function changeStepHandler(num) {
     setStep(num);
@@ -58,7 +73,9 @@ export function PropolsalContextProvider(props) {
     propolsalStep: step,
     changeToStep: changeStepHandler,
     tldr: tldr,
-    changeTLDR: changeTLDR
+    changeTLDR: changeTLDR,
+    context: propolsalContext,
+    changeContext,
   };
 
   //   const context = {

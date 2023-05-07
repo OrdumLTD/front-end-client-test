@@ -20,7 +20,7 @@ const SubmitPropolsalProblemSolution: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="p-10">
+    <div className="xl:ml-48 2xl:ml-60  p-10">
       <div className="max-w-[33rem] flex flex-col">
         <h1 className="text-4xl xl:text-6xl font-medium">Submit Proposal</h1>
 
@@ -70,7 +70,6 @@ const SubmitPropolsalProblemSolution: React.FC<Props> = (props) => {
 
           {/* Button Row - take one level up */}
 
-          {/* ToDo Indexing on the menu show Context, even after weswitch to Problem Solution */}
           <div className="mt-10 flex flex-col gap-4">
             <button
               className="bg-black text-white py-2 md:py-4"

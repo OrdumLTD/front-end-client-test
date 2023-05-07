@@ -1,21 +1,23 @@
 import { useState, useContext } from "react";
-import { web3Accounts, web3Enable } from "@polkadot/extension-dapp";
+import { web3Accounts, web3Enable, web3FromSource } from "@polkadot/extension-dapp";
 
 import WalletContext from "@/store/walletContext";
 import UserContext from "@/store/userContext";
 
-import { InjectedAccountWithMeta } from "@polkadot/extension-inject/types";
+import { InjectedAccountWithMeta, InjectedExtension } from "@polkadot/extension-inject/types";
 
 type TExtensionState = {
   loading: boolean;
   error: null | Error;
   data?: InjectedAccountWithMeta[];
+ 
 };
 
 const initialExtensionState: TExtensionState = {
   loading: false,
   error: null,
   data: undefined,
+ 
 };
 
 
@@ -46,7 +48,7 @@ export const Connect = () => {
 
     const allAccounts: InjectedAccountWithMeta[] | undefined =
       await web3Accounts();
-
+    
     setState({
       loading: false,
       error: null,

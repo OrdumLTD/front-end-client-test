@@ -1,4 +1,4 @@
-import { createContext, use, useState } from "react";
+import { createContext, useState } from "react";
 
 const PropolsalContext = createContext({
   //   Propolsal Menu
@@ -6,16 +6,17 @@ const PropolsalContext = createContext({
   changeToStep: function (number) {},
   // Propolsal Data TLDR
   tldr: {
-    account: "",
+    account: "5Fxn69X58NdsFqfaBdsiinaYvwYccBSiv64YRcG2N24bzPPv",
     projectType: "",
+    teamName: "",
     track: "",
     contact: "",
     propolsalName: "",
     recieveDate: "",
     startingDate: "",
-    fundingAmount: "",
+    fundingAmount: 30,
     exchangeRate: 30,
-    duration: "",
+    deadLine: "",
     shortDescription: "",
     whyDifferentDescription: "",
     externalLinks: "",
@@ -26,9 +27,12 @@ const PropolsalContext = createContext({
     goal: "",
     whyKSM: "",
   },
-  problemSolution: {},
+  problemSolution: {
+    problem: ""
+  },
   changeTLDR: function (arg) {},
   changeContext: function (arg) {},
+  changeProblemSolution: function (arg) {},
   contextOfthePropolsal: {},
 });
 
@@ -37,14 +41,15 @@ export function PropolsalContextProvider(props) {
   const [tldr, setTldr] = useState({
     acount: "5Fxn69X58NdsFqfaBdsiinaYvwYccBSiv64YRcG2N24bzPPv",
     projectType: "Governance",
+    teamName: "",
     track: "",
     contact: "",
     propolsalName: "",
     recieveDate: 1, //
     startingDate: "",
-    fundingAmount: 30,
+    fundingAmount: "",
     exchangeRate: "",
-    duration: "",
+    deadLine: "",
     shortDescription: "",
     whyDifferentDescription: "",
     externalLinks: "",
@@ -57,12 +62,20 @@ export function PropolsalContextProvider(props) {
     whyKSM: "",
   });
 
+  const [propolsalProblemSolution, setPropolsalProblemSolution] = useState({
+    problem: ""
+  })
+
   const changeTLDR = (itemToChange) => {
     setTldr({ ...tldr, ...itemToChange });
   };
 
   const changeContext = (itemToChange) => {
     setPropolsalContext({ ...propolsalContext, ...itemToChange });
+  };
+
+  const changeProblemSolution = (itemToChange) => {
+    setPropolsalProblemSolution({ ...propolsalProblemSolution, ...itemToChange });
   };
 
   function changeStepHandler(num) {
@@ -75,6 +88,8 @@ export function PropolsalContextProvider(props) {
     tldr: tldr,
     changeTLDR: changeTLDR,
     context: propolsalContext,
+    problemSolution: propolsalProblemSolution,
+    changeProblemSolution: changeProblemSolution,
     changeContext,
   };
 

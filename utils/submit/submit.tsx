@@ -46,12 +46,13 @@ const refUnixTime = 1683214032000;
 const BlockTime = 6; // In seconds
 
 // Date to blocknumber
-const convertToBlockNumber = (date: string) =>{
+export const convertToBlockNumber = (date: string) =>{
     // 24-Nov-2023
     // Parse the string 
   
     // Library to convert date to unix
     const unixTime = Date.parse(date)
+    console.log("CurrentUnixTime: " + unixTime)
     // A reference blocknumber and check the corresponding unix time 
     // Difference on our current unix to ref unix
     const diffUnix = unixTime - refUnixTime;
@@ -61,8 +62,5 @@ const convertToBlockNumber = (date: string) =>{
     return blocks
 }
 
-const sumbitPropolsalToBC = () =>{
-    return null
-}
 
-export default sumbitPropolsalToBC
+

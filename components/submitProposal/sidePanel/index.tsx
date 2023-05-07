@@ -103,10 +103,10 @@ const SubmitPropolsalSidePanel: React.FC<Props> = (props) => {
             }
             onClick={() => {
               changeStep(6);
-              router.push("/submitproposal/report");
+              router.push("/submitproposal/preview");
             }}
           >
-            6. Report?
+            6. Preview
           </span>
         </button>
         <button className="flex">

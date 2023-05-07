@@ -1,9 +1,10 @@
 import Image from "next/image";
-import { useContext } from "react";
+import { useContext , useEffect} from "react";
 import { useRouter } from "next/router";
-
+import ChainApiContext from "@/store/apiContext";
 
 import SubmitPropolsalContext from "@/store/submitPropolsal";
+import WalletContext from "@/store/walletContext";
 import Milestone from "./milestone";
 
 type Props = {
@@ -12,8 +13,22 @@ type Props = {
 
 const SubmitPropolsalMilestones: React.FC<Props> = (props) => {
   const submitCtx = useContext(SubmitPropolsalContext);
+  const walletCtx = useContext(WalletContext);
   const router = useRouter();
   const changeStep = submitCtx.changeToStep;
+
+// Proposal submission
+// APIContext
+const apiCTX = useContext(ChainApiContext);
+const chainAPI = apiCTX.api;
+const fetchChainApi = apiCTX.fetchChainApi;
+
+useEffect(()=>{
+  const run = () =>{
+    fetchChainApi?.();
+  }
+  run()
+},[])
 
   const changePropolsalSubPage = async (step: number, route: string) => {
     changeStep(step);
@@ -148,7 +163,7 @@ const SubmitPropolsalMilestones: React.FC<Props> = (props) => {
             <button
               className="bg-black text-white py-2 md:py-4"
               onClick={() =>
-                changePropolsalSubPage(5, "/submitproposal/preview")
+                changePropolsalSubPage(6, "/submitproposal/preview")
               }
             >
               Priview

@@ -10,7 +10,7 @@ import * as kTypes from '@polkadot/types-augment/lookup/kusama';
 
 
 import SubmitPropolsalContext from "@/store/submitPropolsal";
-import ChainApiContext from "@/store/apiContext";
+import WalletContext from "@/store/walletContext";
 
 import '@polkadot/api-augment/kusama';
 
@@ -25,43 +25,14 @@ type Props = {
 
 const SubmitPropolsalFeedback: React.FC<Props> = (props) => {
   const submitCtx = useContext(SubmitPropolsalContext);
+  const walletCtx = useContext(WalletContext)
   const router = useRouter();
   const changeStep = submitCtx.changeToStep;
 
-  // APIContext
-  const apiCTX = useContext(ChainApiContext);
-  const chainAPI = apiCTX.api;
-  const fetchChainApi = apiCTX.fetchChainApi;
+  
 
 
-  useEffect(()=>{
-    const run = () =>{
-      fetchChainApi?.();
-    }
-    run()
-  },[])
-
-    const propose = async() =>{
-      console.log("submitting")
-        const hash = "0x52a16cb6a14fed97265980bc66706bf8c0bfe55d5c4f1e8a29a1ad9ca6b208b3";
-        // Accounts
-        const keyring = new Keyring({type:"sr25519"}); // Default sr25519
-        const alice = keyring.addFromUri("//Alice");
-
-        const Origin = kTypes.default.KusamaRuntimeGovernanceOriginsPalletCustomOriginsOrigin._enum[12];
-        const tx_hash = chainAPI?.tx.referenda.submit({Origins:Origin},{Lookup:{hash,len:44}},{After:1}); 
-
-        await tx_hash?.signAndSend(alice,(status) =>{
-              if(status.status.isInBlock){
-                 console.log("Inblock")
-              }else if(status.status.isFinalized){
-                 console.log("Finalized")
-                 console.log(status.events)
-              }
-          }).catch(err => console.log(err))
-
-    }
-
+   
   //-------------------**------------------------------------------------//
   const changePropolsalSubPage = async (step: number, route: string) => {
     changeStep(step);

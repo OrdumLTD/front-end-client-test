@@ -51,7 +51,7 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
         <div className="mt-8">
           <div className="flex justify-between">
             <label className="text-xl flex">
-              <span>Choose Benefitioary Account </span>
+              <span>Choose Beneficiary Account </span>
               <Image src={infoIcon} width={12} alt="" className="-mt-4 mr-2" />
             </label>
             <span>Transfarable 00.00</span>
@@ -80,6 +80,20 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
             <span className="underline">this link</span> to learn how to do so,
             it will increase your credibility.
           </span>
+
+          <label className="mt-4 text-xl flex">
+            <span>Team Name </span>
+          </label>
+          <input
+            className="mt-2 text-gray-500  w-[33rem] text-xs md:text-sm bg-white border border-black rounded pl-2  md:py-2 focus:outline-none"
+            placeholder="You teams name"
+            autoComplete="off"
+            type="text"
+            value={tldrCtx.teamName}
+            onChange={(e) => {
+              handleTLDRchange({ teamName: e.target.value });
+            }}
+          />
 
           <label className="mt-4 text-xl flex">
             <span>Project Type </span>
@@ -130,6 +144,7 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
             placeholder="Name your propolsal"
             value={tldrCtx.propolsalName}
             onChange={(e) => {
+              console.log(e.target.value)
               handleTLDRchange({ propolsalName: e.target.value });
             }}
             type="text"
@@ -160,7 +175,7 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
             onChange={(e) => {
               handleTLDRchange({ recieveDate: e.target.value });
             }}
-            type="text"
+            type="date"
           />
 
           <label className="mt-4 text-xl flex">
@@ -173,7 +188,7 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
             onChange={(e) => {
               handleTLDRchange({ startingDate: e.target.value });
             }}
-            type="text"
+            type="date"
           />
 
           <label className="mt-4 text-xl flex">
@@ -182,11 +197,11 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
           <input
             className="mt-2 text-gray-500  w-[33rem] text-xs md:text-sm bg-white border border-black rounded pl-2  md:py-2 focus:outline-none"
             placeholder="Eg. 4 months"
-            value={tldrCtx.duration}
+            value={tldrCtx.deadLine}
             onChange={(e) => {
-              handleTLDRchange({ duration: e.target.value });
+              handleTLDRchange({ deadLine: e.target.value });
             }}
-            type="text"
+            type="date"
           />
 
           <label className="mt-4 text-xl flex">

@@ -11,6 +11,8 @@ type Props = {
 
 const SubmitPropolsalProblemSolution: React.FC<Props> = (props) => {
   const submitCtx = useContext(SubmitPropolsalContext);
+  const problemCtx =  submitCtx.problemSolution;
+  const changeProblemSolution = submitCtx.changeProblemSolution
   const router = useRouter();
   const changeStep = submitCtx.changeToStep;
 
@@ -24,9 +26,9 @@ const SubmitPropolsalProblemSolution: React.FC<Props> = (props) => {
       <div className="max-w-[33rem] flex flex-col">
         <h1 className="text-4xl xl:text-6xl font-medium">Submit Proposal</h1>
 
-        <h2 className="mt-8 text-4xl">3. Problem Solution</h2>
+        <h2 className="mt-8 text-2xl xl:text-4xl">3. Problem Solution</h2>
 
-        <form className="mt-4">
+        <div className="mt-4">
           <label className="mt-4 text-xs md:text-sm flex">
             <span>
               Why did you choose to build in Kusama? What is it about this
@@ -41,6 +43,23 @@ const SubmitPropolsalProblemSolution: React.FC<Props> = (props) => {
              behind it. Break down your problem and solution per points that reference each other."
           />
 
+          <label className="mt-4 text-xs md:text-sm flex">
+            <span>
+              What is the problem, that you are trying to solve
+            </span>
+          </label>
+          {/* ToDo fix line break for plaeholder */}
+          <textarea
+            className="mt-2 w-full text-sm bg-white placeholder:font-italitc placeholder:text-xs border border-black rounded
+             py-2 pl-2 pr-4 focus:outline-none resize-none min-h-[10rem]"
+            placeholder="What is the poing of life (42?)"
+            value={problemCtx.problem}
+            onChange={(e) => {
+              changeProblemSolution({ problem: e.target.value });
+            }}
+
+          />
+
           <label className="mt-4 text-xl flex">
             <span>What is the solution to the outlined problem? </span>
           </label>
@@ -50,12 +69,11 @@ const SubmitPropolsalProblemSolution: React.FC<Props> = (props) => {
              py-2 pl-2 pr-4 focus:outline-none resize-none min-h-[10rem]"
             placeholder="Please provide a solution to each problem bullet point. "
           />
-        
-         
-
 
           <label className="mt-4 text-xl flex">
-          <span>How does this proposal change the current logic in Kusama?</span>
+            <span>
+              How does this proposal change the current logic in Kusama?
+            </span>
           </label>
           {/* ToDo fix line break for plaeholder */}
           <textarea
@@ -92,7 +110,7 @@ const SubmitPropolsalProblemSolution: React.FC<Props> = (props) => {
               Back
             </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

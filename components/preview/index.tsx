@@ -6,7 +6,7 @@ type Props = {
   teamName: string;
   propolsalName: string;
   date: string;
-  fundingAmount: string;
+  fundingAmount: number;
   govType?: string;
   deadline: string;
   startDate: string;
@@ -28,7 +28,7 @@ const OrdumPreview: React.FC<Props> = (props) => {
         </div>
         <div>Button? Submit button</div>
         <div>
-          {props.date}, {props.fundingAmount} {props.govType} {props.deadline}{" "}
+          {Date.parse(props.date)}, {props.fundingAmount} {props.govType} {props.deadline}{" "}
           {props.startDate}
         </div>
 

@@ -40,7 +40,7 @@ export default function Bio() {
         </button>
       </div>
 
-      <p className="mt-2 md:mt-4 max-w-[18rem] md:max-w-[40rem] text-xs md:text-base">
+      <p className="mt-2 md:mt-4 text-xs md:text-base">
         Sed ut perspiciatis unde omnis iste natus error sit voluptatem
         accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
         illo inventore veritatis et quasi architecto beatae vitae dicta sunt

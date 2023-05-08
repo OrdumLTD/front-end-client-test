@@ -54,8 +54,7 @@ const SubmitPropolsalPreview: React.FC<Props> = (props) => {
 
   return (
     <div className="xl:ml-48 2xl:ml-60 p-10">
-      <div className="max-w-[33rem] flex flex-col">
-        Preview
+      <div className="max-w-[48rem] flex flex-col">
         {/* Context */}
         <div className="mt-10 ">
           <OrdumPreview

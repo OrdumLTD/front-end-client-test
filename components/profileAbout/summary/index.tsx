@@ -16,7 +16,7 @@ export default function Summary() {
       <div className="pl-0.5 md:pl-16 flex flex-1 flex-col overflow-y-auto paragraph">
         <div className="md:flex justify-between mb-4 md:mb-16">
         <Bio />
-        <GoverenceActivity />
+        {/* <GoverenceActivity /> */}
         </div>
         <ActiveGrants />
         <div className="my-1 md:my-4" />

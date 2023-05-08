@@ -22,9 +22,8 @@ const SubmitProposalContext: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="xl:ml-48 2xl:ml-60 p-10">
+    <div className="xl:ml-48 2xl:ml-60 px-10">
       <div className="max-w-[33rem] flex flex-col">
-        <h1 className="text-4xl xl:text-6xl font-medium">Submit Proposal</h1>
 
         <h2 className="mt-8 text-4xl">2. Context of the Propolsal</h2>
 

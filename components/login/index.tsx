@@ -1,16 +1,16 @@
 import Link from "next/link";
 
 import React, { useContext, useEffect, useState } from "react";
-
+import { Connect } from "../wallet/polkadotjs/connect";
 import type { InjectedAccountWithMeta } from "@polkadot/extension-inject/types";
 import dynamic from "next/dynamic";
 
-const Connect = dynamic(
-  () => import("@/components/wallet/polkadotjs/connect").then((m) => m.Connect),
-  {
-    ssr: false,
-  }
-);
+// const Connect = dynamic(
+//   () => import("@/components/wallet/polkadotjs/connect").then((m) => m.Connect),
+//   {
+//     ssr: false,
+//   }
+// );
 
 const LogIn = () => {
 

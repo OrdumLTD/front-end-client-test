@@ -1,10 +1,8 @@
 import { useState, useContext } from "react";
-import { web3Accounts, web3Enable, web3FromSource } from "@polkadot/extension-dapp";
-
 import WalletContext from "@/store/walletContext";
 import UserContext from "@/store/userContext";
-
-import { InjectedAccountWithMeta, InjectedExtension } from "@polkadot/extension-inject/types";
+import dynamic from "next/dynamic"; 
+import { InjectedAccountWithMeta} from "@polkadot/extension-inject/types";
 
 type TExtensionState = {
   loading: boolean;
@@ -22,19 +20,16 @@ const initialExtensionState: TExtensionState = {
 
 
 
-
 export const Connect = () => {
   const [state, setState] = useState(initialExtensionState);
 
   const userCtx = useContext(UserContext);
 
-  const logInTest = () => {
-    userCtx.logInUser("Test User");
-  };
-
+  
   const handleConnect = async () => {
     setState({ ...initialExtensionState, loading: true });
 
+    const {web3Enable} = await import('@polkadot/extension-dapp');
     web3Enable("Ordum")
       .then((injectedExtensions) => {
         if (!injectedExtensions.length) {
@@ -46,7 +41,8 @@ export const Connect = () => {
         setState({ error, loading: false });
       });
 
-    const allAccounts: InjectedAccountWithMeta[] | undefined =
+      const {web3Accounts} = await import('@polkadot/extension-dapp');
+      const allAccounts: InjectedAccountWithMeta[] | undefined =
       await web3Accounts();
     
     setState({
@@ -79,7 +75,6 @@ export const Connect = () => {
             key={account.address}
             onClick={() => {
               walletCtx.selectAccount(account);
-              logInTest();
             }}
           >
             {account.meta.name}

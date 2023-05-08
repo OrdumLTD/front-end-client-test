@@ -1,5 +1,3 @@
-import { web3Enable, web3Accounts, web3FromSource } from "@polkadot/extension-dapp";
-
 import { stringToHex } from "@polkadot/util";
 
 import type { InjectedAccountWithMeta } from "@polkadot/extension-inject/types";
@@ -11,6 +9,7 @@ let enablePolkadotExtensionCache: Promise<void>;
   if (enablePolkadotExtensionCache) return enablePolkadotExtensionCache;
 
   enablePolkadotExtensionCache = (async () => {
+    const {web3Enable} = await import("@polkadot/extension-dapp");
     const extensions = await web3Enable("Ordum");
 
     if (extensions.length === 0) {
@@ -20,7 +19,7 @@ let enablePolkadotExtensionCache: Promise<void>;
     }
   })();
 
-  return  ;
+  return enablePolkadotExtensionCache ;
 };
 
 export default enablePolkadotExtension

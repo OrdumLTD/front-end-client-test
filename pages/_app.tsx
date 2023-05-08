@@ -4,6 +4,7 @@ import { UserContextProvider } from "../store/userContext";
 import { PropolsalContextProvider } from "@/store/submitPropolsal";
 import { ChainAPIContextProvider } from "@/store/apiContext";
 import { WalletContextProvider } from "@/store/walletContext";
+import { DashboardContextProvider } from "@/store/dashboardContext";
 
 import { Space_Grotesk, Inter } from "@next/font/google";
 
@@ -17,9 +18,11 @@ export default function App({ Component, pageProps }: AppProps) {
       <PropolsalContextProvider>
         <ChainAPIContextProvider>
           <WalletContextProvider>
-          <main className={spaceGrotesk.className}>
-            <Component {...pageProps} />
-          </main>
+            <DashboardContextProvider>
+              <main className={spaceGrotesk.className}>
+                <Component {...pageProps} />
+              </main>
+            </DashboardContextProvider>
           </WalletContextProvider>
         </ChainAPIContextProvider>
       </PropolsalContextProvider>

@@ -25,7 +25,7 @@ function Header() {
             <ul className="navbar-nav grid grid-cols-4 gap-3 md:gap-6">
               <li className="nav-item">
                 <Link
-                  href="/profile/about/person"
+                  href="/dashboard"
                   className="nav-link block hover:text-gray-700 hover:underline transition duration-150 ease-in-out"
                 >
                   Home

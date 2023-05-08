@@ -8,31 +8,20 @@ type Props = {
 
 const ChainSidePanel: React.FC<Props> = (props) => {
   return (
-    <div className={"pt-4 " + props.className}>
-      <div className="pl-8 grid gap-4">
+    <div className={"pt-4 bg-gray-400 " + props.className}>
+      <div className="px-5 grid gap-4">
         <button className="flex">
           <Image src={electricity} width={20} alt="" />
           <span className="mt-0.5 pl-4 font-extrabold text-xl">Overview</span>
         </button>
         <button className="flex">
           <Image src={electricity} width={20} alt="" />
-          <span className="mt-0.5 pl-4 text-xl">All Proposals</span>
+          <span className="mt-0.5 pl-4 text-xl">My Grants</span>
         </button>{" "}
+    
         <button className="flex">
           <Image src={electricity} width={20} alt="" />
-          <span className="mt-0.5 pl-4 text-xl">Discussions</span>
-        </button>{" "}
-        <button className="flex">
-          <Image src={electricity} width={20} alt="" />
-          <span className="mt-0.5 pl-4 text-xl">Small Spender</span>
-        </button>
-        <button className="flex">
-          <Image src={electricity} width={20} alt="" />
-          <span className="mt-0.5 pl-4 text-xl">Medium Spender</span>
-        </button>
-        <button className="flex">
-          <Image src={electricity} width={20} alt="" />
-          <span className="mt-0.5 pl-4 text-xl">Big Spender</span>
+          <span className="mt-0.5 pl-4 text-xl">Manage Teams</span>
         </button>
       </div>
     </div>

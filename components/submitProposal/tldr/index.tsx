@@ -57,22 +57,23 @@ const SubmitProposalTLDR: React.FC<Props> = (props) => {
             <span>Transfarable 00.00</span>
           </div>
           <select
-            onChange={(e) => {
-              const selected = e.target.value;
-              handleTLDRchange({ account: selected });
-            }}
+            // onChange={(e) => {
+            //   const selected = e.target.value;
+            //   handleTLDRchange({ account: selected });
+            // }}
             className="mt-2  text-gray-500
             w-[33rem] pl-2  md:py-2 border border-black rounded-md text-xs md:text-sm shadow-sm bg-white focus:outline-none focus:border-sky-500"
           >
-            <option value="" className="" disabled hidden>
-              All
-            </option>
-
-            <option value="5Fxn69X58NdsFqfaBdsiinaYvwYccBSiv64YRcG2N24bzPPv">
-              5Fxn69X58NdsFqfaBdsiinaYvwYccBSiv64YRcG2N24bzPPv
-            </option>
-            <option value="Option 1">Option 2</option>
-            <option value="Option 2">Option 3</option>
+            {walletCtx.accounts?.map((account) =>
+              <option
+                onClick={() => {
+                  handleTLDRchange({ account: account.address});
+                }}
+              key={account.address}
+                value={account.address}>
+                {account.meta?.name}
+              </option>
+            )}
           </select>
 
           <span className="mt-1.5 block text-xs max-w-[26rem]">

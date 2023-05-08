@@ -1,17 +1,19 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-
+import { InjectedAccountWithMeta , InjectedExtension} from "@polkadot/extension-inject/types";
 import SubmitPropolsalContext from "@/store/submitPropolsal";
 import WalletContext from "@/store/walletContext";
 import ChainApiContext from "@/store/apiContext";
 import OrdumPreview from "@/components/preview";
 import { constuctPreimage } from "@/components/Kusama/kusamaConnect";
+import { web3FromSource } from "@polkadot/extension-dapp";
 
 type Props = {
   className?: string;
 };
 
 const SubmitPropolsalPreview: React.FC<Props> = (props) => {
+  const [wallet, setWallet] = useState<InjectedExtension>();
   const submitCtx = useContext(SubmitPropolsalContext);
   const WalletCtx = useContext(WalletContext);
   const ChainAPICtx = useContext(ChainApiContext);
@@ -32,11 +34,17 @@ const SubmitPropolsalPreview: React.FC<Props> = (props) => {
     run();
   }, []);
 
+ 
   const chainAPI = ChainAPICtx.api;
   // Preimage test
   const submit = async () => {
+    console.log(WalletCtx.wallet)
+    if(WalletCtx.wallet){
+      setWallet(WalletCtx.wallet)
+    }
+
     await constuctPreimage(
-      WalletCtx?.signerState,
+      wallet,
       WalletCtx?.selectedAccount,
       submitCtx?.tldr.fundingAmount,
       submitCtx?.tldr.account,

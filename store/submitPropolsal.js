@@ -6,7 +6,7 @@ const PropolsalContext = createContext({
   changeToStep: function (number) {},
   // Propolsal Data TLDR
   tldr: {
-    account: "5Fxn69X58NdsFqfaBdsiinaYvwYccBSiv64YRcG2N24bzPPv",
+    account: "",
     projectType: "",
     teamName: "",
     track: "",
@@ -39,7 +39,7 @@ const PropolsalContext = createContext({
 export function PropolsalContextProvider(props) {
   const [step, setStep] = useState(1);
   const [tldr, setTldr] = useState({
-    acount: "5Fxn69X58NdsFqfaBdsiinaYvwYccBSiv64YRcG2N24bzPPv",
+    account: "",
     projectType: "Governance",
     teamName: "",
     track: "",

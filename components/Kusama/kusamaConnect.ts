@@ -11,16 +11,19 @@ import "@polkadot/api-augment/kusama";
 // Import the context for wallet and chain context
 
 export const constuctPreimage = async (
-  injector: InjectedExtension,
-  account: InjectedAccountWithMeta,
-  amount: number,
-  beneficiary: string,
-  chainAPI: ApiPromise | undefined
+  injector?: InjectedExtension,
+  account?: InjectedAccountWithMeta,
+  amount?: number,
+  beneficiary?: string,
+  chainAPI?: ApiPromise
 ) => {
   // Get the signer from the account
 
   // Preimage call
-  const tx_preimage_hex = chainAPI?.tx.treasury
+
+  if(injector && account && amount && beneficiary && chainAPI){
+
+    const tx_preimage_hex = chainAPI?.tx.treasury
     .spend(amount, beneficiary)
     .toHex()
     .slice(2);
@@ -34,11 +37,20 @@ export const constuctPreimage = async (
       if (status.isFinalized) {
         console.log("Finalized Preimage txn");
       }
+      // only get the preimage hash
+
+      // codec.hash
       events?.map((event) => {
-        console.log(event.toHuman());
+        let eventPreimage =event.event;
+        if( eventPreimage.section == "preimage"){
+          console.log(eventPreimage.toJSON())
+        };
       });
     }
   );
+
+  }
+ 
 };
 
 /*const submitProposal = async(

@@ -1,35 +1,32 @@
 import { useState, useContext } from "react";
 import WalletContext from "@/store/walletContext";
 import UserContext from "@/store/userContext";
-import dynamic from "next/dynamic"; 
-import { InjectedAccountWithMeta} from "@polkadot/extension-inject/types";
+import dynamic from "next/dynamic";
+import { InjectedAccountWithMeta } from "@polkadot/extension-inject/types";
 
 type TExtensionState = {
   loading: boolean;
   error: null | Error;
   data?: InjectedAccountWithMeta[];
- 
 };
 
 const initialExtensionState: TExtensionState = {
   loading: false,
   error: null,
   data: undefined,
- 
 };
-
-
 
 export const Connect = () => {
   const [state, setState] = useState(initialExtensionState);
-
+  const [selectedAcc, setSelectedAcc] = useState<InjectedAccountWithMeta|undefined>(undefined);
+  // Call the context here and pass allAccounts
+  const walletCtx = useContext(WalletContext);
   const userCtx = useContext(UserContext);
 
-  
   const handleConnect = async () => {
     setState({ ...initialExtensionState, loading: true });
 
-    const {web3Enable} = await import('@polkadot/extension-dapp');
+    const { web3Enable } = await import("@polkadot/extension-dapp");
     web3Enable("Ordum")
       .then((injectedExtensions) => {
         if (!injectedExtensions.length) {
@@ -41,10 +38,10 @@ export const Connect = () => {
         setState({ error, loading: false });
       });
 
-      const {web3Accounts} = await import('@polkadot/extension-dapp');
-      const allAccounts: InjectedAccountWithMeta[] | undefined =
+    const { web3Accounts } = await import("@polkadot/extension-dapp");
+    const allAccounts: InjectedAccountWithMeta[] | undefined =
       await web3Accounts();
-    
+
     setState({
       loading: false,
       error: null,
@@ -52,10 +49,20 @@ export const Connect = () => {
     });
   };
 
-  // Call the context here and pass allAccounts
-  const walletCtx = useContext(WalletContext);
+  
+  if(selectedAcc){
+    
+    (async()=>{
+      const {web3FromSource} = await import("@polkadot/extension-dapp");
+      const injector =  await web3FromSource(selectedAcc.meta.source);
+      walletCtx.getWallet(injector)
+    })()
+    
+  }
+
   // Updating the wallet_context state
   walletCtx.getAllAccounts(state.data);
+
 
   if (state.error) {
     return (
@@ -74,14 +81,21 @@ export const Connect = () => {
           <option
             key={account.address}
             onClick={() => {
-              walletCtx.selectAccount(account);
+              console.log("Click")
+              setSelectedAcc(account);
+              // walletCtx.selectAccount(account);
             }}
           >
             {account.meta.name}
           </option>
         ))}
       </select>
-      <button className=" mt-2 border border-black p-0.5">
+      <button
+        className=" mt-2 border border-black p-0.5"
+        onClick={() => {
+          walletCtx.selectAccount(selectedAcc);
+        }}
+      >
         Use this account
       </button>
     </div>

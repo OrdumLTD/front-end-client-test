@@ -5,7 +5,7 @@ import SubmitPropolsalContext from "@/store/submitPropolsal";
 import WalletContext from "@/store/walletContext";
 import ChainApiContext from "@/store/apiContext";
 import OrdumPreview from "@/components/preview";
-import { constuctPreimage } from "@/components/Kusama/kusamaConnect";
+import { constuctPreimage, submitProposal } from "@/components/Kusama/kusamaConnect";
 import { web3FromSource } from "@polkadot/extension-dapp";
 
 type Props = {
@@ -27,6 +27,8 @@ const SubmitPropolsalPreview: React.FC<Props> = (props) => {
 
   // Connect to the chain
 
+  
+
   useEffect(() => {
     const run = async () => {
       await ChainAPICtx.fetchChainApi();
@@ -34,6 +36,7 @@ const SubmitPropolsalPreview: React.FC<Props> = (props) => {
     run();
   }, []);
 
+  
  
   const chainAPI = ChainAPICtx.api;
   // Preimage test
@@ -42,14 +45,34 @@ const SubmitPropolsalPreview: React.FC<Props> = (props) => {
     if(WalletCtx.wallet){
       setWallet(WalletCtx.wallet)
     }
+    if(submitCtx.tldr.fundingAmount && submitCtx.tldr.recieveDate){
 
-    await constuctPreimage(
-      wallet,
-      WalletCtx?.selectedAccount,
-      submitCtx?.tldr.fundingAmount,
-      submitCtx?.tldr.account,
-      chainAPI
-    );
+      const {hash,preimageData} = await constuctPreimage(
+        wallet,
+        WalletCtx?.selectedAccount,
+        submitCtx?.tldr.fundingAmount,
+        submitCtx?.tldr.account,
+        chainAPI,
+        submitCtx?.tldr.recieveDate
+      )
+      //console.log("hash pre fn " + hash)
+
+      // if(hash.length != 0){
+      //   console.log("hash post pre " + hash)
+      //  await submitProposal(
+      //     WalletCtx?.selectedAccount,
+      //     chainAPI,
+      //     submitCtx?.tldr.fundingAmount,
+      //     preimageData,
+      //     wallet,
+      //     submitCtx?.tldr.recieveDate
+      //   )
+      // }
+    
+    }else{
+      console.log("Missing some field")
+    }
+   
   };
 
   return (

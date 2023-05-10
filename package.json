@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@next/font": "^13.3.0",
-    "@polkadot/api": "^9.13.4",
+    "@phala/sdk": "^0.4.0",
+    "@phala/typedefs": "^0.2.33",
+    "@polkadot/api": "^10.6.1",
     "@polkadot/api-augment": "^10.5.1",
-    "@polkadot/api-contract": "^9.13.4",
+    "@polkadot/api-contract": "^10.6.1",
     "@polkadot/extension-dapp": "^0.46.2",
     "@polkadot/types-augment": "^10.5.1",
     "@types/node": "18.15.11",

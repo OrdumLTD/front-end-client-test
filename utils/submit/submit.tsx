@@ -6,13 +6,13 @@ type TrackKsm = {
 };
 
 // Convert to KSM
-const convert = (usd: number) => usd * 0.03;
+const convert = (usd: number) => usd * 0.3;
 
 // Track Hardcoded<=
 const Tracks = {
-    SmallSpender: 2000,
-    MediumSpender: 5000,
-    BigSpender: 10000
+    SmallSpender: 10000,
+    MediumSpender: 20000,
+    BigSpender: 33000
 }
 
 export const getTrackKsm = (amount: number): TrackKsm => {
@@ -22,14 +22,14 @@ export const getTrackKsm = (amount: number): TrackKsm => {
     let trackNumber:number =0;
     // Compute the track
     if(ksm <= Tracks.SmallSpender){
-        track = "SmallSpender";
+        track = "smallspender";
         trackNumber = 32;
 
     }else if(ksm <= Tracks.MediumSpender){
-        track = "MediumSpender";
+        track = "mediumspender";
         trackNumber = 33;
     }else if(ksm <= Tracks.BigSpender){
-        track = "BigSpender";
+        track = "bigspender";
         trackNumber= 34;
     }
 
@@ -59,7 +59,8 @@ export const convertToBlockNumber = (date: string) =>{
     // Compute blocks to be produced;
     const blocks = Math.ceil(diffUnix/ BlockTime) // Must return a whole number
     // return the blocknumber  
-    return blocks
+    const blockNumber = blocks + refBlockNo;
+    return blockNumber
 }
 
 

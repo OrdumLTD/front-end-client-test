@@ -42,7 +42,7 @@ export const WalletContextProvider = ({ children }: Props) => {
         setAccounts(accounts)
   };
   //Func to select an acount
-  const selectAccount = async(account?: InjectedAccountWithMeta) => {
+  const selectAccount = (account?: InjectedAccountWithMeta) => {
         console.log("welcome" + account?.meta.name)
         setSelectedAccount(account);    
   };

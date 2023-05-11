@@ -1,9 +1,5 @@
-import Link from "next/link";
-
-import React, { useContext, useEffect, useState } from "react";
+import React, {  } from "react";
 import { Connect } from "../wallet/polkadotjs/connect";
-import type { InjectedAccountWithMeta } from "@polkadot/extension-inject/types";
-import dynamic from "next/dynamic";
 
 const LogIn = () => {
 

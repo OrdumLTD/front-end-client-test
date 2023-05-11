@@ -3,7 +3,6 @@ import { ContractPromise } from "@polkadot/api-contract";
 import { createApi } from './chainContractApi';
 // JSON ABI
 import ordumJson from './ordum.json';
-import { ApiPromise } from '@polkadot/api';
 
 export const loadContract = async() =>{
     const contractId:string = '0xa9016cf9d6050d24bd06b91df39ba377181b822d2e423ae6e4eb0ab52e7b36a7';

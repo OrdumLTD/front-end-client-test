@@ -10,7 +10,7 @@ import { web3FromSource } from "@polkadot/extension-dapp";
 import { ApiPromise } from "@polkadot/api";
 import { getTrackKsm, convertToBlockNumber } from "@/utils/submit/submit";
 import '@polkadot/api-augment/kusama';
-import { submitProposal,constuctPreimage } from "@/components/Kusama/kusamaConnect";
+import { submitProposal,constuctPreimage } from "@/components/Kusama/ApiTxn";
 
 
 type Props = {

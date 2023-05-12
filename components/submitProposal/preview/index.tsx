@@ -5,8 +5,13 @@ import SubmitPropolsalContext from "@/store/submitPropolsal";
 import WalletContext from "@/store/walletContext";
 import ChainApiContext from "@/store/apiContext";
 import OrdumPreview from "@/components/preview";
-import { constuctPreimage, submitProposal } from "@/components/Kusama/kusamaConnect";
 import { web3FromSource } from "@polkadot/extension-dapp";
+
+import { ApiPromise } from "@polkadot/api";
+import { getTrackKsm, convertToBlockNumber } from "@/utils/submit/submit";
+import '@polkadot/api-augment/kusama';
+import { submitProposal,constuctPreimage } from "@/components/Kusama/kusamaConnect";
+
 
 type Props = {
   className?: string;
@@ -14,6 +19,8 @@ type Props = {
 
 const SubmitPropolsalPreview: React.FC<Props> = (props) => {
   const [wallet, setWallet] = useState<InjectedExtension>();
+  const [hash, setHash] = useState<string>();
+
   const submitCtx = useContext(SubmitPropolsalContext);
   const WalletCtx = useContext(WalletContext);
   const ChainAPICtx = useContext(ChainApiContext);
@@ -27,8 +34,6 @@ const SubmitPropolsalPreview: React.FC<Props> = (props) => {
 
   // Connect to the chain
 
-  
-
   useEffect(() => {
     const run = async () => {
       await ChainAPICtx.fetchChainApi();
@@ -36,8 +41,7 @@ const SubmitPropolsalPreview: React.FC<Props> = (props) => {
     run();
   }, []);
 
-  
- 
+    
   const chainAPI = ChainAPICtx.api;
   // Preimage test
   const submit = async () => {
@@ -47,28 +51,15 @@ const SubmitPropolsalPreview: React.FC<Props> = (props) => {
     }
     if(submitCtx.tldr.fundingAmount && submitCtx.tldr.recieveDate){
 
-      const {hash,preimageData} = await constuctPreimage(
-        wallet,
-        WalletCtx?.selectedAccount,
-        submitCtx?.tldr.fundingAmount,
-        submitCtx?.tldr.account,
+      await constuctPreimage(
+        WalletCtx.wallet,
+        WalletCtx.selectedAccount,
+        submitCtx.tldr.fundingAmount,
+        submitCtx.tldr.account,
         chainAPI,
         submitCtx?.tldr.recieveDate
-      )
-      //console.log("hash pre fn " + hash)
-
-      // if(hash.length != 0){
-      //   console.log("hash post pre " + hash)
-      //  await submitProposal(
-      //     WalletCtx?.selectedAccount,
-      //     chainAPI,
-      //     submitCtx?.tldr.fundingAmount,
-      //     preimageData,
-      //     wallet,
-      //     submitCtx?.tldr.recieveDate
-      //   )
-      // }
-    
+        )
+      
     }else{
       console.log("Missing some field")
     }

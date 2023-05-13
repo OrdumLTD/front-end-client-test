@@ -1,18 +1,21 @@
 import type { InjectedAccountWithMeta, InjectedExtension } from "@polkadot/extension-inject/types";
 import { ApiPromise } from "@polkadot/api";
 import { getTrackKsm, convertToBlockNumber } from "@/utils/submit/submit";
+import SubmitProposalContext from "../submitProposal/context";
+import { useContext } from "react";
 import '@polkadot/api-augment/kusama';
 
 
 // Import the context for wallet and chain context
 // Preimage
-export const constuctPreimage = async (
+export const PreimageAndReferendum = async (
+   setIndexToStore:(index:number)=>void,
    injector?: InjectedExtension,
    account?: InjectedAccountWithMeta,
    amount?: number,
    beneficiary?: string,
    chainAPI?: ApiPromise,
-   date?:string
+   date?:string,
  ) =>  {
    // Get the signer from the account
  
@@ -47,6 +50,7 @@ export const constuctPreimage = async (
          })
          
          submitProposal(
+           setIndexToStore,
            account,chainAPI,
            amount,
            preimageData,
@@ -63,6 +67,7 @@ export const constuctPreimage = async (
 
 
 export const submitProposal = async(
+    setIndexToStore:(index:number)=>void,
     account?: InjectedAccountWithMeta,chainAPI?:ApiPromise,amount?:number,
     preimage_data?:string, injector?: InjectedExtension,date?:string
     ) =>{
@@ -70,21 +75,30 @@ export const submitProposal = async(
 
       if(account && chainAPI && preimage_data && injector && amount && date){
         console.log("On referendum submit")
-
+      
          // Calculate track 
       const {Track} = getTrackKsm(amount);
 
       const blockNumber = convertToBlockNumber(date);
       
-      const tx_submit_hash = chainAPI?.tx.referenda.submit({Origins:"BigSpender"},{Inline:preimage_data},{At:blockNumber}); 
+      const tx_submit_hash = chainAPI?.tx.referenda.submit({Origins:Track},{Inline:preimage_data},{At:blockNumber}); 
 
       await tx_submit_hash?.signAndSend(account.address,{ signer:injector.signer },({status,events}) =>{
-            if(status.isInBlock){
+      
+
+        if(status.isInBlock){
                console.log("Inblock")
             }else if(status.isFinalized){
-               console.log("Finalized")
-               console.log(events)
+               console.log("Finalized Referendum")
             }
+            events?.map(event =>{
+              //@ts-ignore
+              if(event.toHuman().event.method === 'Submitted'){
+                //@ts-ignore
+                const index = event.toHuman().event.data.index
+                setIndexToStore(index)
+              }
+            })
         }).catch(err => console.log(err))
 
       }

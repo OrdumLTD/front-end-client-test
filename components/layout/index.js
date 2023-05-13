@@ -1,8 +1,22 @@
+import { useEffect, useState, useContext } from "react";
+import ChainApiContext from "@/store/apiContext";
 import Header from "./header";
 import Sidebar from "./sidebar";
+import '@polkadot/api-augment/kusama';
+
+
+
+// Connect to the chain Api in the Home page
+
+//1. test queries
 
 export default function Layout(props) {
-  console.log("hllo")  
+  const ChainAPICtx = useContext(ChainApiContext);
+  
+  useEffect(()=>{
+    ChainAPICtx.fetchChainApi()
+  },[])
+
   return (
     <main className="flex flex-col h-screen ">
       <div className="flex flex-1 overflow-hidden">

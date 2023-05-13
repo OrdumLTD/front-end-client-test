@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
-
+import ChainApiContext from "@/store/apiContext";
+import { useContext, useEffect } from "react";
+import { getReferendumInfo } from "@/components/Kusama/ApiQuery";
 //ToDo Fish out proer logos
 
 type Props = {
@@ -7,6 +9,13 @@ type Props = {
 };
 
 const ExploreContent: React.FC<Props> = (props) => {
+  const ChainAPICtx = useContext(ChainApiContext);
+
+  const getRefInfo = async() =>{
+    getReferendumInfo(180, ChainAPICtx.api)
+  }
+  
+
   const router = useRouter();
   return (
     <div className={"pl-5 mt-16 " + props.className}>
@@ -78,6 +87,9 @@ const ExploreContent: React.FC<Props> = (props) => {
           </div>
         </div> */}
       </div>
+      <button onClick={() => getRefInfo()}>
+        Query
+      </button>
     </div>
   );
 };

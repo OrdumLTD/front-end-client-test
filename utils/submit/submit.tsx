@@ -6,13 +6,14 @@ type TrackKsm = {
 };
 
 // Convert to KSM
-const convert = (usd: number) => usd * 0.3;
+const convert = (usd: number) => usd * 0.04;
 
 // Track Hardcoded<=
 const Tracks = {
-    SmallSpender: 10000,
-    MediumSpender: 20000,
-    BigSpender: 33000
+    SmallSpender: 333,
+    MediumSpender: 3333,
+    BigSpender: 33333,
+    Treasurer: 33334
 }
 
 export const getTrackKsm = (amount: number): TrackKsm => {
@@ -22,15 +23,18 @@ export const getTrackKsm = (amount: number): TrackKsm => {
     let trackNumber:number =0;
     // Compute the track
     if(ksm <= Tracks.SmallSpender){
-        track = "smallspender";
+        track = "SmallSpender";
         trackNumber = 32;
 
     }else if(ksm <= Tracks.MediumSpender){
-        track = "mediumspender";
+        track = "MediumSpender";
         trackNumber = 33;
     }else if(ksm <= Tracks.BigSpender){
-        track = "bigspender";
+        track = "BigSpender";
         trackNumber= 34;
+    }else{
+        track = "Treasurer";
+        trackNumber = 11;
     }
 
     const tt = {

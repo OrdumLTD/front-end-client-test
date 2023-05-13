@@ -3,6 +3,8 @@ import { createContext, useState } from "react";
 const PropolsalContext = createContext({
   //   Propolsal Menu
   propolsalStep: 1,
+  proposalIndex:0,
+  setProposalIndex: function(index){},
   changeToStep: function (number) {},
   // Propolsal Data TLDR
   tldr: {
@@ -38,6 +40,7 @@ const PropolsalContext = createContext({
 
 export function PropolsalContextProvider(props) {
   const [step, setStep] = useState(1);
+  const [proposalIndex, setProposalIndex] = useState(0)
   const [tldr, setTldr] = useState({
     account: "",
     projectType: "Governance",
@@ -52,7 +55,7 @@ export function PropolsalContextProvider(props) {
     deadLine: "",
     shortDescription: "",
     whyDifferentDescription: "",
-    externalLinks: "",
+    externalLinks: ""
   });
 
   const [propolsalContext, setPropolsalContext] = useState({
@@ -82,8 +85,14 @@ export function PropolsalContextProvider(props) {
     setStep(num);
   }
 
+  const setPropIndex = (index) =>{
+    setProposalIndex(index)
+  }
+
   const context = {
     propolsalStep: step,
+    proposalIndex,
+    setProposalIndex: setPropIndex,
     changeToStep: changeStepHandler,
     tldr: tldr,
     changeTLDR: changeTLDR,

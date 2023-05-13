@@ -10,7 +10,7 @@ import { web3FromSource } from "@polkadot/extension-dapp";
 import { ApiPromise } from "@polkadot/api";
 import { getTrackKsm, convertToBlockNumber } from "@/utils/submit/submit";
 import '@polkadot/api-augment/kusama';
-import { submitProposal,constuctPreimage } from "@/components/Kusama/ApiTxn";
+import { submitProposal, PreimageAndReferendum } from "@/components/Kusama/ApiTxn";
 
 
 type Props = {
@@ -35,12 +35,13 @@ const SubmitPropolsalPreview: React.FC<Props> = (props) => {
   // Connect to the chain
 
   useEffect(() => {
-    const run = async () => {
-      await ChainAPICtx.fetchChainApi();
-    };
-    run();
+   
   }, []);
 
+  // callBack fn
+  const fetchIndex = (index:number) =>[
+    submitCtx.setProposalIndex(index)
+  ]
     
   const chainAPI = ChainAPICtx.api;
   // Preimage test
@@ -51,7 +52,8 @@ const SubmitPropolsalPreview: React.FC<Props> = (props) => {
     }
     if(submitCtx.tldr.fundingAmount && submitCtx.tldr.recieveDate){
 
-      await constuctPreimage(
+      await PreimageAndReferendum(
+        fetchIndex,
         WalletCtx.wallet,
         WalletCtx.selectedAccount,
         submitCtx.tldr.fundingAmount,
@@ -59,7 +61,6 @@ const SubmitPropolsalPreview: React.FC<Props> = (props) => {
         chainAPI,
         submitCtx?.tldr.recieveDate
         )
-      
     }else{
       console.log("Missing some field")
     }
@@ -84,6 +85,7 @@ const SubmitPropolsalPreview: React.FC<Props> = (props) => {
             solution={submitCtx.context.goal}
             ifYouHaveSeenSimilar={submitCtx.tldr.whyDifferentDescription}
           />
+          <h3>Index: {submitCtx?.proposalIndex}</h3>
         </div>
         <div className="mt-10 flex flex-col gap-4">
           {/* Buttons and whatnot */}

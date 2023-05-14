@@ -1,17 +1,24 @@
 // ToDo Fit for mobile
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Link from "next/link";
 // import { Link } from "react-router-dom";
 
+import SignUpContext from "@/store/signUpContext";
 import TeamMember from "./TeamMember";
 
 const AddTeamMembers = () => {
-  const [teamMembers, setTeamMembers] = useState<number>(5);
+  const SignUpCtx = useContext(SignUpContext);
+  const [teamMembers, setTeamMembers] = useState<number>(1);
+  const [arrayOfTeamMembers, setArrayOfTeamMembers] = useState<String[]>();
 
-  function addTeamMember() {
+  const addTeamMember = () => {
     setTeamMembers(teamMembers + 1);
-  }
+  };
+
+  // const removeTeamMember = () => {
+  //   setTeamMembers(teamMembers - 1)
+  // }
 
   return (
     <div className="font-space-grotesk grid h-screen place-items-center relative mb-20">

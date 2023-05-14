@@ -5,6 +5,7 @@ import { PropolsalContextProvider } from "@/store/submitPropolsal";
 import { ChainAPIContextProvider } from "@/store/apiContext";
 import { WalletContextProvider } from "@/store/walletContext";
 import { CertContextProvider } from "@/store/contractContext";
+import { SignUpContextProvider } from "@/store/signUpContext";
 
 import { Space_Grotesk, Inter } from "@next/font/google";
 
@@ -19,10 +20,12 @@ export default function App({ Component, pageProps }: AppProps) {
         <ChainAPIContextProvider>
           <WalletContextProvider>
             <CertContextProvider>
-          <main className={spaceGrotesk.className}>
-            <Component {...pageProps} />
-          </main>
-          </CertContextProvider>
+              <SignUpContextProvider>
+                <main className={spaceGrotesk.className}>
+                  <Component {...pageProps} />
+                </main>
+              </SignUpContextProvider>
+            </CertContextProvider>
           </WalletContextProvider>
         </ChainAPIContextProvider>
       </PropolsalContextProvider>

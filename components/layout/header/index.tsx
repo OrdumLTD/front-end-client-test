@@ -1,6 +1,8 @@
 import Link from "next/link";
-import Image from "next/image"
+import Image from "next/image";
+import { useContext } from "react";
 
+import WalletContext from "@/store/walletContext";
 import SearchBar from "./searchBar";
 
 import BellIcon from "../../../assets/svg-icons/bell-icon.svg";
@@ -12,6 +14,8 @@ function Header() {
   // const openDevTools = () => {
   //   openModal = true
   // }
+
+  const WalletCtx = useContext(WalletContext);
 
   return (
     <div>
@@ -30,24 +34,24 @@ function Header() {
                 >
                   Home
                 </Link>
-                </li>
-                <li className="nav-item">
+              </li>
+              <li className="nav-item">
                 <Link
                   href="/explore"
                   className="nav-link block -ml-1.5 md:ml-0 hover:text-gray-700 hover:underline transition duration-150 ease-in-out"
                 >
                   Explore
                 </Link>
-                </li>
-                <li className="nav-item">
+              </li>
+              <li className="nav-item">
                 <Link
                   href="/"
                   className="nav-link block hover:text-gray-700 hover:underline transition duration-150 ease-in-out"
                 >
                   Teams
                 </Link>
-                </li>
-                {/* <Link to="/">
+              </li>
+              {/* <Link to="/">
                   <a
                     className="nav-link block hover:text-gray-700 hover:underline transition duration-150 ease-in-out"
                     href="#!"
@@ -93,7 +97,6 @@ function Header() {
                     KSM
                   </a>
                 </Link> */}
-              
             </ul>
           </div>
           <div className="hidden md:flex absolute right-40">
@@ -113,7 +116,12 @@ function Header() {
                   className="hover:cursor-pointer"
                 />
               </Link>
-              <Link href="Settings">
+              <Link
+                onClick={() => {
+                  WalletCtx.logOut();
+                }}
+                href="/"
+              >
                 <Image
                   src={SettingsIcon}
                   alt="Settings page"

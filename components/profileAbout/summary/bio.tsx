@@ -15,7 +15,8 @@ export default function Bio() {
     <div className="flex flex-col">
       <div className="md:flex flex-row md:gap-16">
         <p className="text-lg md:text-4xl">Bio</p>
-        <div className="md:ml-10 mt-2 flex flex-row gap-4">
+        <div className="md:ml-10 mt-2  flex flex-row gap-4">
+          <div className="ml-[38rem] flex flex-row gap-4">
           <Link href="/">
             <Image src={Email} alt="Send an Email" height={24} />
           </Link>
@@ -34,6 +35,7 @@ export default function Bio() {
           <Link href="/">
             <Image src={Website} alt="Link to Website" height={24} />
           </Link>
+          </div>
         </div>
         <button className="mt-2 md:mt-0 border-2 rounded border-black hover:bg-gray-200 px-1 md:px-14 md:font-bold">
           Docs

@@ -45,26 +45,26 @@ const ChainContent = () => {
         <div className="mt-2">
           <div className="border border-2 border-black px-6 py-4 flex justify-between gap-5">
             <div className="text-2xl font-semibold pt-1">Ordum</div>
-            <div className="border rounded-xl p-2 bg-red-100 text-sm">
+            <div className="border rounded-xl p-2 bg-red-100 text-sm h-10">
               Milestone Deadline
             </div>
             <div className="flex flex-col">
               <div>Ordum Milestone 1</div>
               <div className="text-gray-400">15/04/2024</div>
             </div>
-           <button className="bg-black text-white px-5 rounded-xl">Submit</button>
+           <button className="bg-black text-white px-5 w-40 rounded-xl">Submit</button>
           </div>
 
           <div className="px-6 py-4 flex justify-between gap-5 bg-gray-100">
             <div className="text-2xl font-semibold pt-1">Kusama</div>
-            <div className="border rounded-xl p-2 bg-green-200 text-sm">
+            <div className="border rounded-xl p-2 bg-green-200 text-sm h-10">
               New Comment
             </div>
             <div className="flex flex-col">
               <div>Referenda Name</div>
               <div className="text-gray-400">@userame4</div>
             </div>
-           <button className="bg-black text-white px-5 rounded-xl">View</button>
+           <button className="bg-black text-white px-5 w-40 rounded-xl">View</button>
           </div>
         </div>
         

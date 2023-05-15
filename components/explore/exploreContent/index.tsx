@@ -1,7 +1,5 @@
 import { useRouter } from "next/router";
 
-//ToDo Fish out proer logos
-
 type Props = {
   className?: string;
 };
@@ -20,12 +18,13 @@ const ExploreContent: React.FC<Props> = (props) => {
         <div
           className="mt-2 bg-gray-200 border-2 py-2 border-black rounded cursor-pointer"
           onClick={() => {
-            router.push("/submitproposal/tldr");
+            router.push("/explore/kusamatreasury");
           }}
         >
           <div className="px-5 flex justify-between">
             <div className="flex">
               <div className="w-20 h-20 bg-black rounded-full"></div>
+              {/* <Image /> */}
               <div className="mt-2 ml-5 flex flex-col">
                 <h3 className="text-3xl font-medium">Kusama Treasury</h3>
                 <span>On-chain</span>

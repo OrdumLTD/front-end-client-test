@@ -1,5 +1,8 @@
 import { ReactNode, createContext, useState } from "react";
-import type{ InjectedAccountWithMeta, InjectedExtension} from "@polkadot/extension-inject/types";
+import type {
+  InjectedAccountWithMeta,
+  InjectedExtension,
+} from "@polkadot/extension-inject/types";
 import React from "react";
 
 type Props = {
@@ -7,48 +10,57 @@ type Props = {
 };
 
 interface WalletInfo {
-  wallet?: InjectedExtension
+  wallet?: InjectedExtension;
   accounts?: InjectedAccountWithMeta[];
   selectedAccount?: InjectedAccountWithMeta;
-  getAllAccounts: (accounts?:InjectedAccountWithMeta[]) => void;
-  selectAccount: (account?:InjectedAccountWithMeta) => void;
-  getWallet: (wallet?:InjectedExtension) => void;
+  getAllAccounts: (accounts?: InjectedAccountWithMeta[]) => void;
+  selectAccount: (account?: InjectedAccountWithMeta) => void;
+  logOut: () => void;
+  getWallet: (wallet?: InjectedExtension) => void;
 }
 
 const defaultState = {
   wallet: undefined,
   accounts: undefined,
   selectedAccount: undefined,
-  getAllAccounts: (accounts?:InjectedAccountWithMeta[]) => {
+  getAllAccounts: (accounts?: InjectedAccountWithMeta[]) => {
     return;
   },
   selectAccount: (account?: InjectedAccountWithMeta) => {
     return;
   },
-  getWallet: (wallet?:InjectedExtension) =>{
+  logOut: () => {
     return;
-  }
+  },
+  getWallet: (wallet?: InjectedExtension) => {
+    return;
+  },
 };
 
 const WalletContext = createContext<WalletInfo>(defaultState);
 
 export const WalletContextProvider = ({ children }: Props) => {
   const [accounts, setAccounts] = useState<InjectedAccountWithMeta[]>();
-  const [selectedAccount, setSelectedAccount] = useState<InjectedAccountWithMeta>();
-  const [wallet, setWallet] =  useState<InjectedExtension>();
+  const [selectedAccount, setSelectedAccount] =
+    useState<InjectedAccountWithMeta | undefined>();
+  const [wallet, setWallet] = useState<InjectedExtension>();
 
   // Funct to get all acounts
-  const getAllAccounts = (accounts?:InjectedAccountWithMeta[]) => {
-        setAccounts(accounts)
+  const getAllAccounts = (accounts?: InjectedAccountWithMeta[]) => {
+    setAccounts(accounts);
   };
   //Func to select an acount
-  const selectAccount = async(account?: InjectedAccountWithMeta) => {
-        console.log("welcome" + account?.meta.name)
-        setSelectedAccount(account);    
+  const selectAccount = async (account?: InjectedAccountWithMeta) => {
+    console.log("welcome" + account?.meta.name);
+    setSelectedAccount(account);
   };
-  const getWallet = (wallet?:InjectedExtension) =>{
-        setWallet(wallet)
+  //Used to "logout"
+  const logOut = () => {
+    setSelectedAccount(undefined)
   }
+  const getWallet = (wallet?: InjectedExtension) => {
+    setWallet(wallet);
+  };
 
   const context = {
     wallet,
@@ -56,7 +68,8 @@ export const WalletContextProvider = ({ children }: Props) => {
     selectedAccount,
     getAllAccounts,
     selectAccount,
-    getWallet
+    getWallet,
+    logOut
   };
 
   return (

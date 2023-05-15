@@ -19,8 +19,9 @@ export default function Home() {
   // }
 
   return walletCtx.selectedAccount ? (
- 
+    
     <Layout>
+      {console.log("asd")}
     </Layout>
   ) : (
     <LogIn />

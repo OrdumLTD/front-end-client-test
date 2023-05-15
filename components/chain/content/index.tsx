@@ -46,7 +46,7 @@ const ChainContent = () => {
           </div>
         </div>
         <div className="mt-2 border-t border-2 border-black"></div>
-        <div className="mt-2">
+        {/* <div className="mt-2">
           <div className="border border-2 border-black px-6 py-4 flex justify-between gap-5">
             <div className="text-2xl font-semibold pt-1">Ordum</div>
             <div className="border rounded-xl p-2 bg-red-100 text-sm h-10">
@@ -70,7 +70,7 @@ const ChainContent = () => {
             </div>
            <button className="bg-black text-white px-5 w-40 rounded-xl">View</button>
           </div>
-        </div>
+        </div> */}
         
       </div>
     </div>

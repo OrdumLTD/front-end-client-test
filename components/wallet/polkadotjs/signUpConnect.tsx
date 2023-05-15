@@ -1,8 +1,10 @@
 import { useState, useContext } from "react";
+
 import WalletContext from "@/store/walletContext";
 import UserContext from "@/store/userContext";
 import dynamic from "next/dynamic";
 import { InjectedAccountWithMeta } from "@polkadot/extension-inject/types";
+import { useRouter } from "next/router";
 
 type TExtensionState = {
   loading: boolean;
@@ -16,7 +18,7 @@ const initialExtensionState: TExtensionState = {
   data: undefined,
 };
 
-export const Connect = () => {
+export const SignUpConnect = () => {
   const [state, setState] = useState(initialExtensionState);
   const [selectedAcc, setSelectedAcc] = useState<
     InjectedAccountWithMeta | undefined
@@ -24,6 +26,8 @@ export const Connect = () => {
   // Call the context here and pass allAccounts
   const walletCtx = useContext(WalletContext);
   const userCtx = useContext(UserContext);
+
+  const router = useRouter();
 
   const handleConnect = async () => {
     setState({ ...initialExtensionState, loading: true });
@@ -92,6 +96,8 @@ export const Connect = () => {
         className=" mt-2 border border-black p-0.5"
         onClick={() => {
           walletCtx.selectAccount(selectedAcc);
+          console.log(walletCtx?.selectedAccount?.meta.name);
+          router.push("/dashboard");
         }}
       >
         Use this account
@@ -99,7 +105,7 @@ export const Connect = () => {
     </div>
   ) : (
     <button disabled={state.loading} onClick={handleConnect}>
-      {state.loading ? "Connecting..." : "Connect"}
+      {state.loading ? "Connecting..." : "Choose A Wallet"}
     </button>
   );
 };

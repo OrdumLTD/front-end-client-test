@@ -36,7 +36,7 @@ const AddTeamMembers = () => {
         >
           Add More
         </button>
-        <Link href="/profile/about/person">
+        <Link href="/dashboard">
           <button className="mt-4 border bg-black text-white w-full py-3 text-lg">
             Save and close
           </button>

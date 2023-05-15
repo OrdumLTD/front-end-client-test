@@ -44,7 +44,7 @@ const OrdumPreview: React.FC<Props> = (props) => {
             <div>{props.fundingAmount}</div>
           </div>{" "}
           <div className="flex flex-col">
-            <span className="font-bold">Type</span> <span>Governance</span>
+            <span className="font-bold">Type</span> <span>{props.govType}</span>
           </div>{" "}
           <div className="flex flex-col">
             <span className="font-bold">Deadline</span> {props.deadline}

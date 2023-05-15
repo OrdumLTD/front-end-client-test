@@ -21,8 +21,8 @@ const ApplicationProcess = () => {
     <div className=" mx-10 md:ml-16 md:mr-32 md:text-xl font-space-grotesk flex flex-col ">
       <div>
         <div className="flex mb-5">
-          <span>1</span>
-          <h3 className="ml-12 text-3xl">Understand the governance process </h3>
+          <div className="border rounded-full border-black border-2 px-5 py-3 -ml-4">1</div>
+          <h3 className="ml-4 text-3xl">Understand the governance process </h3>
         </div>
         <div className="ml-14">
           <p className="mt-8">
@@ -161,8 +161,8 @@ const ApplicationProcess = () => {
         </div>
 
         <div className="flex mt-16 mb-5">
-          <span>2</span>
-          <h3 className="ml-12 text-3xl">Join Element</h3>
+          <span className="border rounded-full border-black border-2 px-5 py-3 -ml-4">2</span>
+          <h3 className="ml-4 text-3xl">Join Element</h3>
         </div>
         <div className="ml-14">
           <p className="mt-8">
@@ -201,8 +201,8 @@ const ApplicationProcess = () => {
         </div>
 
         <div className="flex mt-16 mb-5">
-          <span>3</span>
-          <h3 className="ml-12 text-3xl">Draft Your Propolsal</h3>
+          <span className="border rounded-full border-black border-2 px-5 py-3 -ml-4">3</span>
+          <h3 className="ml-4 text-3xl">Draft Your Propolsal</h3>
         </div>
         <div className="ml-14">
           <p className="mt-8">
@@ -228,8 +228,8 @@ const ApplicationProcess = () => {
         </div>
 
         <div className="flex mt-16 mb-5">
-          <span>4</span>
-          <h3 className="ml-12 text-3xl">Create Identity</h3>
+          <span className="border rounded-full border-black border-2 px-5 py-3 -ml-4">4</span>
+          <h3 className="ml-4 text-3xl">Create Identity</h3>
         </div>
         <div className="ml-14">
           <p className="mt-8">
@@ -240,8 +240,8 @@ const ApplicationProcess = () => {
         </div>
 
         <div className="flex mt-16 mb-5">
-          <span>5</span>
-          <h3 className="ml-12 text-3xl">Seek Feedack</h3>
+          <span className="border rounded-full border-black border-2 px-5 py-3 -ml-4">5</span>
+          <h3 className="ml-4 text-3xl">Seek Feedack</h3>
         </div>
         <div className="ml-14">
           <p className="mt-8">
@@ -279,8 +279,8 @@ const ApplicationProcess = () => {
         </div>
 
         <div className="flex mt-16 mb-5">
-          <span>6</span>
-          <h3 className="ml-12 text-3xl">
+          <span className="border rounded-full border-black border-2 px-5 py-3 -ml-4">6</span>
+          <h3 className="ml-5 text-3xl">
             Update proposal based on feedback and submit proposal
           </h3>
         </div>
@@ -292,8 +292,8 @@ const ApplicationProcess = () => {
         </div>
 
         <div className="flex mt-16 mb-5">
-          <span>7</span>
-          <h3 className="ml-12 text-3xl">
+          <span className="border rounded-full border-black border-2 px-5 py-3 -ml-4">7</span>
+          <h3 className="ml-4 text-3xl">
             Add relevant information to your proposal
           </h3>
         </div>
@@ -324,8 +324,8 @@ const ApplicationProcess = () => {
         </div>
 
         <div className="flex mt-16 mb-5">
-          <span>8</span>
-          <h3 className="ml-12 text-3xl">Engage</h3>
+          <span className="border rounded-full border-black border-2 px-5 py-3 -ml-4">8</span>
+          <h3 className="ml-4 text-3xl">Engage</h3>
         </div>
         <div className="ml-14">
           {" "}
@@ -337,8 +337,8 @@ const ApplicationProcess = () => {
         </div>
 
         <div className="flex mt-16 mb-5">
-          <span>9</span>
-          <h3 className="ml-12 text-3xl">Report</h3>
+          <span className="border rounded-full border-black border-2 px-5 py-3 -ml-4">9</span>
+          <h3 className="ml-4 text-3xl">Report</h3>
         </div>
         <div className="ml-14">
           <p className="mt-8">

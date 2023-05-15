@@ -68,6 +68,7 @@ const SubmitPropolsalPreview: React.FC<Props> = (props) => {
             problem={submitCtx.tldr.shortDescription}
             solution={submitCtx.context.goal}
             ifYouHaveSeenSimilar={submitCtx.tldr.whyDifferentDescription}
+            govType={submitCtx.tldr.projectType}
           />
         </div>
         <div className="mt-10 flex flex-col gap-4">

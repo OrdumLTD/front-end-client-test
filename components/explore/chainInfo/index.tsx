@@ -7,6 +7,9 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import ApplicationProcess from "./applicationProcess";
 
+import SearchIcon from "@/assets/svg-icons/search-icon.svg";
+import Image from "next/image";
+
 // enum About {
 //   Summary,
 //   Activity,
@@ -45,7 +48,9 @@ const ChainInfo = () => {
           px-2 md:px-16 md:py-0.5 md:py-1
           bg-black text-white
           text-sm md:text-base"
-              onClick={() => {router.push("/submitproposal/tldr")}}
+              onClick={() => {
+                router.push("/submitproposal/tldr");
+              }}
             >
               Apply
             </button>
@@ -54,7 +59,29 @@ const ChainInfo = () => {
       </nav>
       <div className="flex flex-col ">
         {/* Header */}
-        <div className="mx-10 md:ml-16 md:mr-32 md:text-xl flex navbar md:border-b border-black mb-8 flex gap-8"></div>
+        <div className="mx-10 md:ml-16 md:mr-32 md:text-xl pb-2 md:border-b border-black mb-8 flex justify-between">
+          <div className="flex gap-8 navbar">
+            <div className=" hover:cursor-pointer">Grant Details</div>{" "}
+            <div className="font-bold hover:cursor-pointer">
+              Application process
+            </div>{" "}
+            <div className=" hover:cursor-pointer">Wiki</div>
+          </div>
+          <div className="-mt-1">
+            <div>
+              <label className="relative block">
+                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                  <Image src={SearchIcon} alt="Search lense" />
+                </span>
+                <input
+                  className="w-[20rem] bg-white placeholder:font-italitc border border-black rounded-full  pl-10 py-1  focus:outline-none text-sm"
+                  placeholder="Search for proposals and discussions"
+                  type="text"
+                />
+              </label>
+            </div>
+          </div>
+        </div>
         <ApplicationProcess />
       </div>
     </div>

@@ -159,7 +159,7 @@ useEffect(()=>{
           {/* Button Row - take one level up */}
 
           {/* ToDo Indexing on the menu show Context, even after weswitch to Problem Solution */}
-          <div className="xl:ml-48 2xl:ml-60 flex flex-col gap-4">
+          <div className="mt-12 mb-20 flex flex-col gap-4">
             <button
               className="bg-black text-white py-2 md:py-4"
               onClick={() =>

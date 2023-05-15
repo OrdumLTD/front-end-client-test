@@ -1,9 +1,24 @@
+import { useEffect, useState, useContext } from "react";
+import ChainApiContext from "@/store/apiContext";
 import Header from "./header";
 import Sidebar from "./sidebar";
+import '@polkadot/api-augment/kusama';
+
+
+
+// Connect to the chain Api in the Home page
+
+//1. test queries
 import { useRouter } from 'next/router';
 
 
 export default function Layout(props) {
+  const ChainAPICtx = useContext(ChainApiContext);
+  
+  useEffect(()=>{
+    ChainAPICtx.fetchChainApi()
+  },[])
+
   
   const router = useRouter();
   if(router.pathname === "/"){

@@ -1,6 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { useContext } from "react";
+
+import SignUpContext from "@/store/signUpContext";
 
 import { Mail, GitHub } from "react-feather";
 import Discord from "../../assets/svg-icons/discord.svg";
@@ -9,6 +12,8 @@ import Matrix from "../../assets/svg-icons/matrix.png";
 import Website from "../../assets/svg-icons/global.png";
 
 const CreateTeamPrifile = () => {
+  const SignUpCtx = useContext(SignUpContext);
+
   const [teamType, setTeamType] = useState("Organization");
   const [applicantType, setAppicantType] = useState("Applicant");
 
@@ -54,20 +59,24 @@ const CreateTeamPrifile = () => {
           <div className="mt-8">
             <h3>Are you a applicant or a foundation?</h3>
             <div className="mt-2 rounded bg-gray-200 py-2 flex space-around px-2">
-              <button className={
+              <button
+                className={
                   applicantType === "Applicant"
                     ? "border rounded w-40 bg-black py-3 px-8 text-white text-xs"
                     : "border rounded w-40 bg-gray-400 py-3 px-8 text-white text-xs"
                 }
-                onClick={() => setAppicantType("Applicant")}>
+                onClick={() => setAppicantType("Applicant")}
+              >
                 Applicant
               </button>
-              <button className={
+              <button
+                className={
                   applicantType === "Foundation"
                     ? "border rounded w-40  ml-2 bg-black py-3 px-8 text-white text-xs"
                     : "border rounded w-40  ml-2 bg-gray-400 py-3 px-8 text-white text-xs"
                 }
-                onClick={() => setAppicantType("Foundation")}>
+                onClick={() => setAppicantType("Foundation")}
+              >
                 Foundation
               </button>
             </div>
@@ -81,6 +90,10 @@ const CreateTeamPrifile = () => {
                 className="mt-2 w-full text-sm bg-white placeholder:font-italitc border border-black rounded py-2 pl-2 pr-4 focus:outline-none"
                 placeholder="What is the name of your team?"
                 type="text"
+                value={SignUpCtx?.teamName}
+                onChange={(e) => {
+                  SignUpCtx.setName(e.target.value);
+                }}
               />
             </div>
             <div className="mt-4 md:w-5/12">
@@ -88,6 +101,10 @@ const CreateTeamPrifile = () => {
               <textarea
                 className="mt-2 w-full resize-none h-40 text-sm bg-white placeholder:font-italitc border border-black rounded focus:outline-none break-all"
                 placeholder="What is the name of your team?"
+                value={SignUpCtx?.description}
+                onChange={(e) => {
+                  SignUpCtx.setDescription(e.target.value);
+                }}
               />
             </div>
             <div className="mt-4 md:w-5/12">
@@ -95,14 +112,24 @@ const CreateTeamPrifile = () => {
               <select
                 className="mt-2 w-full text-sm bg-white placeholder:font-italitc border border-black rounded py-2 pl-2 pr-4 focus:outline-none"
                 placeholder="Choole a category"
+                onChange={(e) => {
+                  SignUpCtx.setProjectType(e.target.value);
+                }}
               >
                 <option value="" className="" disabled selected hidden>
                   Select your option
                 </option>
-                <option value="test1">Test1</option>
-                <option value="test2">Test2</option>
-                <option value="test3">Test3</option>
-                <option value="text3">Test4</option>
+                <option value="Governance">Governance</option>
+                <option value="Defi">Defi</option>
+                <option value="Communication">Communication</option>
+                <option value="Privacy">Privacy</option>
+                <option value="Education">Education</option>
+                <option value="Events">Events</option>
+                <option value="Infrastracture">Infrastracture</option>
+                <option value="Art">Art</option>
+                <option value="Media">Media</option>
+                <option value="NFT">NFT</option>
+                <option value="Other">Other</option>
               </select>
             </div>
             <div className="mt-4 md:w-5/12">
@@ -110,6 +137,10 @@ const CreateTeamPrifile = () => {
               <textarea
                 className="mt-2 w-full resize-none h-36 text-sm bg-white placeholder:font-italitc border border-black rounded focus:outline-none break-all"
                 placeholder="What does your team want to achieve?"
+                value={SignUpCtx?.mission}
+                onChange={(e) => {
+                  SignUpCtx.setMission(e.target.value);
+                }}
               />
             </div>
           </div>

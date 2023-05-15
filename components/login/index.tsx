@@ -1,30 +1,9 @@
-import Link from "next/link";
-
-import React, { useContext, useEffect, useState } from "react";
+import React, {  } from "react";
 import { Connect } from "../wallet/polkadotjs/connect";
-import type { InjectedAccountWithMeta } from "@polkadot/extension-inject/types";
-import dynamic from "next/dynamic";
-
-// const Connect = dynamic(
-//   () => import("@/components/wallet/polkadotjs/connect").then((m) => m.Connect),
-//   {
-//     ssr: false,
-//   }
-// );
+import  Link  from "next/link"
 
 const LogIn = () => {
 
-  // Wallet states
-  const [accounts, setAccounts] = useState<InjectedAccountWithMeta[]>();
-
-  useEffect(() => {
-    // enablePolkadotExtensionCache();
-    // const getWallets = async () => {
-    //   const allAccounts = await web3Accounts();
-    //   setAccounts(allAccounts);
-    // };
-    // getWallets();
-  }, []);
 
   return (
     <div className="font-space-grotesk grid h-screen place-items-center">

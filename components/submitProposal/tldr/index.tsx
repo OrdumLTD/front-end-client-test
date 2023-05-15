@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import { useContext } from "react";
 import { useRouter } from "next/router";
 

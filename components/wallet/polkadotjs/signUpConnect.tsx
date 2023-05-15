@@ -97,7 +97,7 @@ export const SignUpConnect = () => {
         onClick={() => {
           walletCtx.selectAccount(selectedAcc);
           console.log(walletCtx?.selectedAccount?.meta.name);
-          router.push("/dashboard");
+          router.push("/createteamprofile");
         }}
       >
         Use this account

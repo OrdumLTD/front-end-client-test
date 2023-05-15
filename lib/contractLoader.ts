@@ -4,8 +4,9 @@ import { createApi } from './chainContractApi';
 // JSON ABI
 import ordumJson from './ordum.json';
 
-export const loadContract = async() =>{
-    const contractId:string = '0xa9016cf9d6050d24bd06b91df39ba377181b822d2e423ae6e4eb0ab52e7b36a7';
+export const loadContract = async():Promise<ContractPromise> =>{
+    
+    const contractId:string = '0xc2919b27099e95fba3ac3238a4fd0cbeb9bf4b0dda1355a864d423e0dc1804f1';
     const rpc:string = 'wss://poc5.phala.network/ws';
     const pruntime:string = 'https;//poc5.phala.network/tee-api-1';
 

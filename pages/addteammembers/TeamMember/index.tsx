@@ -1,6 +1,6 @@
 const TeamMember = () => {
   return (
-    <form className="flex ">
+    <div className="flex ">
       <input
         type="text"
         placeholder="Confirming team member identity+send invite "
@@ -24,7 +24,7 @@ const TeamMember = () => {
         <option value="test1">Test1</option>
         <option value="test2">Test2</option>
       </select>
-    </form>
+    </div>
   );
 };
 

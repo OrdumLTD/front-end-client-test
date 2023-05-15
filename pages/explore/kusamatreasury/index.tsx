@@ -6,7 +6,7 @@ const Explore = () => {
   return (
     <Layout>
       <div className="flex flex-1 h-screen w-screen">
-        <ChainSidePanel className="bg-gray-300 w-64" />
+        <ChainSidePanel className="bg-gray-300 w-72" />
         <ChainInfo />
       </div>
     </Layout>

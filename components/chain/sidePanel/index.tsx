@@ -16,12 +16,27 @@ const ChainSidePanel: React.FC<Props> = (props) => {
         </button>
         <button className="flex">
           <Image src={electricity} width={20} alt="" />
-          <span className="mt-0.5 pl-4 text-xl">My Grants</span>
+          <span className="mt-0.5 pl-4 text-xl">All Propolsals</span>
         </button>{" "}
     
         <button className="flex">
           <Image src={electricity} width={20} alt="" />
-          <span className="mt-0.5 pl-4 text-xl">Manage Teams</span>
+          <span className="mt-0.5 pl-4 text-xl">Discussions</span>
+        </button>
+
+        <button className="flex">
+          <Image src={electricity} width={20} alt="" />
+          <span className="mt-0.5 pl-4 text-xl">Small Spender</span>
+        </button>
+
+        <button className="flex">
+          <Image src={electricity} width={20} alt="" />
+          <span className="mt-0.5 pl-4 text-xl">Medium Spender</span>
+        </button>
+
+        <button className="flex">
+          <Image src={electricity} width={20} alt="" />
+          <span className="mt-0.5 pl-4 text-xl">Big Spender</span>
         </button>
       </div>
     </div>

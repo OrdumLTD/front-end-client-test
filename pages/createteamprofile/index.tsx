@@ -75,22 +75,22 @@ const CreateTeamPrifile = () => {
         </div>
         <div>
           <div className="mt-8 md:mt-12 md:w-screen flex flex-col">
-            <form className="md:w-5/12">
+            <div className="md:w-5/12">
               <label>Team Name</label>
               <input
                 className="mt-2 w-full text-sm bg-white placeholder:font-italitc border border-black rounded py-2 pl-2 pr-4 focus:outline-none"
                 placeholder="What is the name of your team?"
                 type="text"
               />
-            </form>
-            <form className="mt-4 md:w-5/12">
+            </div>
+            <div className="mt-4 md:w-5/12">
               <label>About</label>
               <textarea
                 className="mt-2 w-full resize-none h-40 text-sm bg-white placeholder:font-italitc border border-black rounded focus:outline-none break-all"
                 placeholder="What is the name of your team?"
               />
-            </form>
-            <form className="mt-4 md:w-5/12">
+            </div>
+            <div className="mt-4 md:w-5/12">
               <label>Project Type</label>
               <select
                 className="mt-2 w-full text-sm bg-white placeholder:font-italitc border border-black rounded py-2 pl-2 pr-4 focus:outline-none"
@@ -104,14 +104,14 @@ const CreateTeamPrifile = () => {
                 <option value="test3">Test3</option>
                 <option value="text3">Test4</option>
               </select>
-            </form>
-            <form className="mt-4 md:w-5/12">
+            </div>
+            <div className="mt-4 md:w-5/12">
               <label>Mission</label>
               <textarea
                 className="mt-2 w-full resize-none h-36 text-sm bg-white placeholder:font-italitc border border-black rounded focus:outline-none break-all"
                 placeholder="What does your team want to achieve?"
               />
-            </form>
+            </div>
           </div>
           <div className="mt-10 w-5/12">
             <h3 className="mb-4">Links</h3>

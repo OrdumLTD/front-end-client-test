@@ -10,19 +10,19 @@ const ChainContent = () => {
         <div className="mt-5 flex gap-5">
           <div className="flex flex-col items-center border border-black rounded px-16 py-2">
             <div className="">Active Grants</div>
-            <span className="font-bold">2</span>
+            <span className="font-bold">-</span>
           </div>
           <div className="flex flex-col items-center border border-black rounded px-16 py-2">
             <div className="">Next Milestone Deadline</div>
-            <span className="font-bold"> 15/04/2025</span>
+            <span className="font-bold"> DD/MM/YYYY</span>
           </div>
           <div className="flex flex-col items-center border border-black rounded px-16 py-2">
             <div className="">New Comments</div>
-            <span className="font-bold">2</span>
+            <span className="font-bold">-</span>
           </div>
           <div className="flex flex-col items-center border border-black rounded px-16 py-2">
             <div className="">Pending Grants</div>
-            <span className="font-bold">1</span>
+            <span className="font-bold">-</span>
           </div>
         </div>
         <div className="mt-10">

@@ -1,12 +1,16 @@
 import Layout from "@/components/layout";
-
+import WalletContext from "@/store/walletContext";
+import { useContext } from "react";
 // import ChainSidePanel from "../sidePanel";
 
 const ChainContent = () => {
+
+  const WalletCtx = useContext(WalletContext);
+
   return (
     <div className="pt-4 px-10">
       <div>
-        <div className="text-2xl">Welcome Back, Human!</div>
+        <div className="text-2xl">Welcome Back, {WalletCtx?.selectedAccount?.meta.name}!</div>
         <div className="mt-5 flex gap-5">
           <div className="flex flex-col items-center border border-black rounded px-16 py-2">
             <div className="">Active Grants</div>

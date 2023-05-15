@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useContext } from "react";
 
 import SignUpContext from "@/store/signUpContext";
@@ -10,12 +10,22 @@ import Discord from "../../assets/svg-icons/discord.svg";
 import Twitter from "../../assets/svg-icons/twitter-icon.svg";
 import Matrix from "../../assets/svg-icons/matrix.png";
 import Website from "../../assets/svg-icons/global.png";
+import { loadContract } from "@/lib/contractLoader";
+
 
 const CreateTeamPrifile = () => {
   const SignUpCtx = useContext(SignUpContext);
 
   const [teamType, setTeamType] = useState("Organization");
   const [applicantType, setAppicantType] = useState("Applicant");
+
+  const contractLoading = async() =>{
+    const apiContract = await loadContract()
+  }
+
+  useEffect(() =>{
+    
+  },[])
 
   // const { user } = useSelector((state: RootState) => state.user);
   // const dispatch = useDispatch();

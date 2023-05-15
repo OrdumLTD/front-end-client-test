@@ -52,11 +52,8 @@ export const WalletContextProvider = ({ children }: Props) => {
   //Func to select an acount
   const selectAccount = (account?: InjectedAccountWithMeta) => {
         console.log("welcome" + account?.meta.name)
-        setSelectedAccount(account);    
-  const selectAccount = async (account?: InjectedAccountWithMeta) => {
-    console.log("welcome" + account?.meta.name);
-    setSelectedAccount(account);
-  };
+        setSelectedAccount(account);   
+  }      
   //Used to "logout"
   const logOut = () => {
     setSelectedAccount(undefined)

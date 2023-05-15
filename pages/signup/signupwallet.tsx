@@ -8,7 +8,10 @@ const SignUpWallet = () => {
 
   // const logInTest = () => {
   //   dispatch(logInTestUser())
-  // }
+  // } 
+  
+  // Connect the contract
+
   return (
     <div className="font-space-grotesk grid h-screen place-items-center">
       <div className="-mt-96 grid place-items-center border px-10 py-5 md:px-40 md:py-20">

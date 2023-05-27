@@ -17,7 +17,7 @@ const defaultState = {
     fetchChainApi: () => {return},
 }
 
-const ChainApiContext = React.createContext<ChainAPIContextInterface>(defaultState);
+const ChainApiContext = createContext<ChainAPIContextInterface>(defaultState);
 
 // const ChainApiContext = createContext({
 //     //Variables and Functions

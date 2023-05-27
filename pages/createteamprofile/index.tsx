@@ -11,22 +11,34 @@ import Twitter from "../../assets/svg-icons/twitter-icon.svg";
 import Matrix from "../../assets/svg-icons/matrix.png";
 import Website from "../../assets/svg-icons/global.png";
 import { loadContract } from "@/lib/contractLoader";
+import ContractContext from "@/store/contractContext";
 
 
 const CreateTeamPrifile = () => {
   const SignUpCtx = useContext(SignUpContext);
+  const ContractCtx = useContext(ContractContext);
 
   const [teamType, setTeamType] = useState("Organization");
   const [applicantType, setAppicantType] = useState("Applicant");
 
   const contractLoading = async() =>{
-    const apiContract = await loadContract()
+    const apiContract = await loadContract().catch(err => console.log("Error Connecting Contract: "+err));
+    // Store into the context
+    if(apiContract){
+      ContractCtx.setContractApi(apiContract);
+    }else{
+      console.log("Didnt work connecting to contract")
+    }
+    
+
   }
 
   useEffect(() =>{
-    
+    contractLoading()
+    console.log("Helo Contract")
   },[])
 
+  console.log(ContractCtx?.contractApi?.abi)
   // const { user } = useSelector((state: RootState) => state.user);
   // const dispatch = useDispatch();
 

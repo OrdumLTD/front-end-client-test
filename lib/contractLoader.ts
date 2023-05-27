@@ -3,21 +3,24 @@ import { ContractPromise } from "@polkadot/api-contract";
 import { createApi } from './chainContractApi';
 // JSON ABI
 import ordumJson from './ordum.json';
+import { ApiPromise } from '@polkadot/api';
 
 export const loadContract = async():Promise<ContractPromise> =>{
     
-    const contractId:string = '0xc2919b27099e95fba3ac3238a4fd0cbeb9bf4b0dda1355a864d423e0dc1804f1';
+    const contractId:string = '0x00b0fd9fedbe3d7bd1e7d81dc24f21fdfb08f2ae7f900da7d62900d354b23fb5';
     const rpc:string = 'wss://poc5.phala.network/ws';
-    const pruntime:string = 'https;//poc5.phala.network/tee-api-1';
+    const pruntime:string = 'https://poc5.phala.network/tee-api-1';
 
     const api= await createApi(rpc);
+    
+    const contrapi: ApiPromise = await((await create({api,baseURL:pruntime,contractId})).api).isReady;
         
     const contract = new ContractPromise(
         //@ts-ignore
-        (await create({api,baseURL:pruntime,contractId})).api,
-            ordumJson,
-            contractId
-        )
-    
+        contrapi,
+        ordumJson,
+        contractId
+    )
     return contract
 }
+

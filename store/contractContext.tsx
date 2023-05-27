@@ -7,7 +7,7 @@ type Props = {
 };
 
 // Certificate Data
-interface Certificate {
+interface Contract {
   cache?: CertificateData;
   contractApi?: ContractPromise;
   signCert: (cert?: CertificateData) => void;
@@ -25,7 +25,7 @@ const defaultState = {
   },
 };
 
-const CertificateContext = createContext<Certificate>(defaultState);
+const ContractContext = createContext<Contract>(defaultState);
 
 export const CertContextProvider = ({ children }: Props) => {
   const [cache, setCache] = useState<CertificateData>();
@@ -47,8 +47,9 @@ export const CertContextProvider = ({ children }: Props) => {
   };
 
   return (
-    <CertificateContext.Provider value={context}>
+    <ContractContext.Provider value={context}>
       {children}
-    </CertificateContext.Provider>
+    </ContractContext.Provider>
   );
 };
+export default ContractContext; 

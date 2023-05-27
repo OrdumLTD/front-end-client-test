@@ -3,16 +3,16 @@ import { useRouter } from "next/router";
 
 type Props = {
   className?: string;
-  teamName: string;
-  propolsalName: string;
-  date: string;
-  fundingAmount: number;
+  teamName?: string;
+  propolsalName?: string;
+  date?: string;
+  fundingAmount?: number;
   govType?: string;
-  deadline: string;
-  startDate: string;
-  propolsalDescription: string;
-  problem: string;
-  solution: string;
+  deadline?: string;
+  startDate?: string;
+  propolsalDescription?: string;
+  problem?: string;
+  solution?: string;
   ifYouHaveSeenSimilar?: string;
 };
 

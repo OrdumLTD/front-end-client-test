@@ -42,8 +42,10 @@ WIP ~ would be good to add example text here from a previous proposal.
 
 
 --> enable image upload, and decide on editing tools "
-            value={contextCtx.howDidItComeToMind}
+            //@ts-ignore
+            value={contextCtx?.howDidItComeToMind}
             onChange={(e) => {
+              //@ts-ignore
               handleSubmitCtxChange({ howDidItComeToMind: e.target.value });
             }}
           />
@@ -58,8 +60,10 @@ WIP ~ would be good to add example text here from a previous proposal.
 
 
             --> enable image upload, and decide on editing tools "
-            value={contextCtx.howDoesItHelp}
+            //@ts-ignore
+            value={contextCtx?.howDoesItHelp}
             onChange={(e) => {
+              //@ts-ignore
               handleSubmitCtxChange({ howDoesItHelp: e.target.value });
             }}
           />
@@ -70,8 +74,10 @@ WIP ~ would be good to add example text here from a previous proposal.
           <textarea
             className="mt-2 w-full text-sm bg-white placeholder:font-italitc border border-black rounded py-2 pl-2 pr-4 focus:outline-none resize-none min-h-[10rem]"
             placeholder="How does success look like?"
-            value={contextCtx.goal}
+            //@ts-ignore
+            value={contextCtx?.goal}
             onChange={(e) => {
+              //@ts-ignore
               handleSubmitCtxChange({ goal: e.target.value });
             }}
           />
@@ -83,8 +89,10 @@ WIP ~ would be good to add example text here from a previous proposal.
           <textarea
             className="mt-2 w-full text-sm bg-white placeholder:font-italitc border border-black rounded py-2 pl-2 pr-4 focus:outline-none resize-none min-h-[10rem]"
             placeholder="Why did you choose to build in Kusama? What is it about this network that encourages you to submit this proposal? "
-            value={contextCtx.whyKSM}
+            //@ts-ignore
+            value={contextCtx?.whyKSM}
             onChange={(e) => {
+              //@ts-ignore
               handleSubmitCtxChange({ whyKSM: e.target.value });
             }}
           />

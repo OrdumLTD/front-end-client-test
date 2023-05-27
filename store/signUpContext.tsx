@@ -1,22 +1,18 @@
 import React, { createContext, useState, ReactNode } from "react";
-// import { CertificateData, signCertificate } from "@phala/sdk";
-// import { ContractPromise } from '@polkadot/api-contract';
+
 
 type Props = {
   children: ReactNode;
 };
 
-//
+
 interface SignUp {
-  // cache?: CertificateData,
-  // contractApi?: ContractPromise,
-  // signCert:(cert?: CertificateData)=> void;
-  // setContractApi:(api?:ContractPromise)=> void;
-  teamName: String | undefined;
-  description: String | undefined;
-  mission?: String | undefined;
-  projectType: String | undefined;
-  teamMembers: String[] | undefined;
+ 
+  teamName?: String;
+  description?: String;
+  mission?: String;
+  projectType?: String;
+  teamMembers?: String[];
   setName: (v: String) => void;
   setDescription: (v: String) => void;
   setMission: (v: String) => void;
@@ -25,16 +21,16 @@ interface SignUp {
 }
 
 const defaultState = {
-  teamName: "",
-  description: "",
-  mission: "",
-  projectType: "",
+  teamName: undefined,
+  description: undefined,
+  mission: undefined,
+  projectType: undefined,
   teamMembers: [],
-  setName: (v: String) => { return },
-  setDescription: (v: String) => { return },
-  setMission: (v: String) => { return },
-  setProjectType: (v: String) => { return },
-  addTeamMember: (v: String) => { return },
+  setName: (v?: String) => { return },
+  setDescription: (v?: String) => { return },
+  setMission: (v?: String) => { return },
+  setProjectType: (v?: String) => { return },
+  addTeamMember: (v?: String) => { return },
 };
 
 const SignUpContext = createContext<SignUp>(defaultState);
@@ -85,11 +81,9 @@ export const SignUpContextProvider = ({ children }: Props) => {
     projectType,
     setName,
     setDescription,
-    setMission,
     setProjectType,
-    // contractApi,
-    // signCert,
-    // setContractApi: setContract
+    setMission,
+    addTeamMember
   };
 
   return (

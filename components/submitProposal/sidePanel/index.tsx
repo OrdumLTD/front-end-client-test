@@ -21,7 +21,7 @@ const SubmitPropolsalSidePanel: React.FC<Props> = (props) => {
    await router.push(route);
   };
 
-  const step = submitCtx.propolsalStep;
+  const step = submitCtx.proposalStep;
   const changeStep = submitCtx.changeToStep;
 
   return (

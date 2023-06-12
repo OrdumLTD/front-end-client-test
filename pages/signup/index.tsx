@@ -14,7 +14,7 @@ const SignUp = () => {
 
         <Link href="signup/signupwallet"><button className="w-60 border border-gray-400 hover:bg-gray-200 py-2.5">Wallet</button></Link>
         <div className="my-1 md:my-2"></div>
-        <Link href="/createteamprofile"><button className="w-60 border border-gray-400 hover:bg-gray-200 py-2.5">Email</button></Link>
+        <Link href="signup/wallet-less"><button className="w-60 border border-gray-400 hover:bg-gray-200 py-2.5">Passcode & Username</button></Link>
         <div className="my-1 md:my-2"></div>
       </div>
     </div>

@@ -69,7 +69,7 @@ const SubmitPropolsalFeedback: React.FC<Props> = (props) => {
           <div className="mt-10 flex flex-col gap-4">
             <button
               className="bg-black text-white py-2 md:py-4"
-              onClick={() => propose()}
+              //onClick={() => ()}
             >
               Submit Discussion
             </button>

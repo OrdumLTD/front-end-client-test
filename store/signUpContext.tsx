@@ -8,16 +8,16 @@ type Props = {
 
 interface SignUp {
  
-  teamName?: String;
-  description?: String;
-  mission?: String;
-  projectType?: String;
-  teamMembers?: String[];
-  setName: (v: String) => void;
-  setDescription: (v: String) => void;
-  setMission: (v: String) => void;
-  setProjectType: (v: String) => void;
-  addTeamMember: (v: String) => void;
+  teamName?: string;
+  description?: string;
+  mission?: string;
+  projectType?: string;
+  teamMembers?: string[];
+  setName: (v: string) => void;
+  setDescription: (v: string) => void;
+  setMission: (v: string) => void;
+  setProjectType: (v: string) => void;
+  addTeamMember: (v: string) => void;
 }
 
 const defaultState = {
@@ -26,22 +26,22 @@ const defaultState = {
   mission: undefined,
   projectType: undefined,
   teamMembers: [],
-  setName: (v?: String) => { return },
-  setDescription: (v?: String) => { return },
-  setMission: (v?: String) => { return },
-  setProjectType: (v?: String) => { return },
-  addTeamMember: (v?: String) => { return },
+  setName: (v?: string) => { return },
+  setDescription: (v?: string) => { return },
+  setMission: (v?: string) => { return },
+  setProjectType: (v?: string) => { return },
+  addTeamMember: (v?: string) => { return },
 };
 
 const SignUpContext = createContext<SignUp>(defaultState);
 
 export const SignUpContextProvider = ({ children }: Props) => {
   // const [cache, setCache] = useState<SignUp>();
-  const [teamName, setTeamName] = useState<String>();
-  const [description, setdDesc] = useState<String>();
-  const [mission, setMiss] = useState<String>();
-  const [projectType, setProject] = useState<String>();
-  const [teamMembers, setTeamMembrs] = useState<String[]>();
+  const [teamName, setTeamName] = useState<string>();
+  const [description, setdDesc] = useState<string>();
+  const [mission, setMiss] = useState<string>();
+  const [projectType, setProject] = useState<string>();
+  const [teamMembers, setTeamMembrs] = useState<string[]>();
   // const [contractApi, setContractApi] = useState<ContractPromise>();
 
   // const signCert = (cert?: CertificateData) =>{
@@ -52,23 +52,23 @@ export const SignUpContextProvider = ({ children }: Props) => {
   //     setContractApi(api)
   // }
 
-  const setName = (name?: String) => {
+  const setName = (name?: string) => {
     setTeamName(name);
   };
 
-  const setDescription = (description?: String) => {
+  const setDescription = (description?: string) => {
     setdDesc(description);
   };
 
-  const setMission = (mission?: String) => {
+  const setMission = (mission?: string) => {
     setMiss(mission);
   };
 
-  const setProjectType = (project?: String) => {
+  const setProjectType = (project?: string) => {
     setProject(project);
   };
 
-  const addTeamMember = (teamMember?: String) =>{
+  const addTeamMember = (teamMember?: string) =>{
     //@ts-ignore
     setTeamMembrs(teamMembers.push(teamMember))
   }

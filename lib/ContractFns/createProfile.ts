@@ -19,6 +19,7 @@ export const onSignCertificate = async(
 
     return certificateCache = (async() =>{
         certificate = await signCertificate({
+            //@ts-ignore // Pjs Api version later that 9.14.2 is kinda not compatible
             api,
             signer:signer.signer,
             //@ts-ignore
@@ -73,6 +74,7 @@ export const createApplicantProfile = async(
         categories
     );
     // Sign and Send
+    //@ts-ignore
     txnData.signAndSend(account.address,{signer:Signer},({isInBlock,events,isCompleted,isFinalized})=>{
         if(isInBlock){
             console.log("In Block")
@@ -133,6 +135,7 @@ export const createIssuerProfile = async(
         allowedAccounts,
     );
     // Sign and Send
+    //@ts-ignore
     txnData.signAndSend(account.address,{signer:Signer},({isInBlock,events,isCompleted,isFinalized})=>{
         if(isInBlock){
             console.log("In Block")

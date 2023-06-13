@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react'
+'use client'
+
+import React, { useEffect, useState, useContext } from 'react'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -9,78 +11,75 @@ import keyring from '@polkadot/ui-keyring';
 import { createApplicantProfile, onSignCertificate } from '@/lib/ContractFns/createProfile';
 import { KeyringPair } from '@polkadot/keyring/types';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
+import ChainApiContext from '@/store/apiContext';
+import { CreateResult } from '@polkadot/ui-keyring/types';
+import { OrdumAccountContext } from '@/store/walletLessSignUp';
 
 
 function WalletLess() {
 
+  //context
+  const ChainCtx = useContext(ChainApiContext);
+  const OrdumAccCtx = useContext(OrdumAccountContext)
+
+  useEffect(()=>{
+    ChainCtx.fetchPoc5Api();
+  },[])
+
   interface userData {
     username: string,
-    passcode: string
-  }
-
-  interface OrdumAcc {
-    secret: string,
-    password: string
-  }
-  const defaultOrdum:OrdumAcc ={
-    secret:"",
-    password:""
+    passcode: string,
+    userPair?:CreateResult
   }
 
   const [data,setData] = useState<userData>();
-  // Ordum Pirvate keys
-  const [ordumAcc, setOrdumAcc] = useState<OrdumAcc>(defaultOrdum);
-
-  // Store the Ordum Account
-  const [keypair,setKeyPair] = useState<KeyringPair>();
-
-  // Fetch account
-  const [name, setName] = useState<string>("");
-  const [addr, setAddr] = useState<string>("");
-
-  const fetchOrdum = () =>{
-    const accounts = keyring.getAccounts();
-
-    accounts.forEach(({ address, meta, publicKey }) =>{
-      if(meta.name == name){
-        setAddr(address)
-      }
-    })
-  
-  }
-
-  const addOrdumAccc = (ordum:OrdumAcc) =>{
-    setOrdumAcc({...ordumAcc,...ordum});
-    //add the account to the keyring
-  }
-
-
-  
-  const OrdumAdd = () =>{
-    cryptoWaitReady().then(() => {
-      // load all available addresses and accounts
-      keyring.loadAll({ ss58Format: 42, type: 'sr25519' });
-    
-      // additional initialization here, including rendering
-      const { pair} = keyring.addUri(ordumAcc?.secret,ordumAcc?.password,{ name: "Ordum" });
-      //@ts-ignore
-      setKeyPair(pair)
-    });
-    
-  }
 
   const registerUser =(toChange: userData)=>{
+    // Store it in local storage
     setData({...data,...toChange})
   }
 
   // Dry run profile creation + Optional<Preimage>
-  const dryCreateProfile = async() =>{
+  const dryRunAndFundAcc = async() =>{
 
+    // Update KeyringPair for Ordum Account
+    //@ts-ignore
+    const {pair} = keyring.addUri(OrdumAccCtx.secret,OrdumAccCtx.password,{name:OrdumAccCtx.name})
+    // Update to the store
+    //@ts-ignore
+    OrdumAccCtx.setKeyPair(pair)
+
+    let api = ChainCtx.poc5;
+    let address = data?.userPair?.pair.address;
+    let ordumPair = OrdumAccCtx.keypair;
+    
+    if(api && address && ordumPair){
+      const fundCall = api.tx.balances.transferKeepAlive(address,1000000000000);
+      
+      await fundCall?.signAndSend(ordumPair,({isFinalized,events})=>{
+        if(isFinalized){
+          console.log("balance transfered to new user")
+          events.map(event =>{
+            console.log(event.toHuman())
+          })
+        };
+      })
+    }
+    
   }
 
   // Testing Wallet Less SignUp
   const walletLessSignup = async() =>{
-      const userMnemonic = mnemonicGenerate(12);
+      // Set local storage for users secret
+        const userMnemonic = mnemonicGenerate(12);
+
+        const userPair = keyring.addUri(userMnemonic,data?.passcode,{name:data?.username})
+        //@ts-ignore
+        setData(prevData =>({
+          ...prevData,
+          userPair:userPair
+        }))
+      
       
   };
 
@@ -120,69 +119,11 @@ function WalletLess() {
         </TextField>
 
       </div>
-      <Button onClick={walletLessSignup}sx={{width:255, height:30, padding:1}} variant="outlined">Signup</Button>
+      <Button onClick={walletLessSignup}sx={{width:255, height:30, padding:1, marginBottom:3}} variant="outlined">Signup</Button>
+      <Button onClick={dryRunAndFundAcc}sx={{width:255, height:30, padding:1}} variant="outlined">Activate Account</Button>
+
      </Box>
 
-     <Box 
-       component="form"
-       sx={{
-         '& .MuiTextField-root': { m: 1, width: '25ch' },
-         display:"flex",
-         flexDirection:"column",
-         alignItems:"center"}}
-     >
-        {/* Testing for Ordum Secret input for initial setup */}
-        Classified
-        <div className="flex flex-col">
-        <TextField 
-          required
-          id="secret"
-          label="secret"
-          //@ts-ignore
-          onChange={(e) =>{addOrdumAccc({secret:e.target.value})}}
-        >
-
-        </TextField>
-
-        <TextField 
-            required
-            id="password"
-            label="password"
-            //@ts-ignore
-            onChange={(e) =>{addOrdumAccc({password:e.target.value})}}
-        >
-          
-        </TextField>
-        </div>
-        <Button onClick={OrdumAdd}sx={{width:255, height:30, padding:1}} variant="outlined">Add Ordum Account</Button>
-        <h3>{keypair?.address}</h3>
-     </Box>
-
-     {/* fetch Ordum Account */}
-     <Box 
-        component="form"
-        sx={{
-          '& .MuiTextField-root': { m: 1, width: '25ch' },
-          display:"flex",
-          flexDirection:"column",
-          alignItems:"center"
-        }}
-        noValidate
-     >
-      Fetch Ordum Account
-     <TextField 
-            required
-            id="ordum-name"
-            label="ordum-name"
-            //@ts-ignore
-            onChange={(e) =>{setName(e.target.value)}}
-        >
-      </TextField>
-      <Button 
-          onClick={fetchOrdum}sx={{width:255, height:30, padding:1}} variant="outlined"
-          >ordum</Button>
-        <h2>{addr}</h2>
-     </Box>
     </main>
   )
 }

@@ -9,6 +9,7 @@ import { SignUpContextProvider } from "@/store/signUpContext";
 import { DashboardContextProvider } from "@/store/dashboardContext";
 
 import { Space_Grotesk, Inter } from "@next/font/google";
+import { OrdumAccountProvider, WalletLessUserProvider } from "@/store/walletLessSignUp";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -22,9 +23,13 @@ export default function App({ Component, pageProps }: AppProps) {
           <WalletContextProvider>
             <CertContextProvider>
               <SignUpContextProvider>
-                <main className={spaceGrotesk.className}>
-                  <Component {...pageProps} />
-                </main>
+                <OrdumAccountProvider>
+                  <WalletLessUserProvider>
+                    <main className={spaceGrotesk.className}>
+                      <Component {...pageProps} />
+                    </main>
+                  </WalletLessUserProvider>
+                </OrdumAccountProvider>
               </SignUpContextProvider>
             </CertContextProvider>
           </WalletContextProvider>

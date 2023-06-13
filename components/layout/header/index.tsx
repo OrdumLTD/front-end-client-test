@@ -120,7 +120,7 @@ function Header() {
                 onClick={() => {
                   WalletCtx.logOut();
                 }}
-                href="/"
+                href="/settings"
               >
                 <Image
                   src={SettingsIcon}

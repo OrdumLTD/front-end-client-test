@@ -41,7 +41,7 @@ export const createApplicantProfile = async(
     description: string,
     allowedAccounts: Array<AccountId>|null,
     categories: Array<Categories>
-
+    
 ) =>{
 
     const Signer = signer.signer;
@@ -73,6 +73,8 @@ export const createApplicantProfile = async(
         allowedAccounts,
         categories
     );
+
+   
     // Sign and Send
     //@ts-ignore
     txnData.signAndSend(account.address,{signer:Signer},({isInBlock,events,isCompleted,isFinalized})=>{

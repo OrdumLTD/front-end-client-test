@@ -1,6 +1,6 @@
 import { CertificateData, signCertificate } from "@phala/sdk";
 import type { InjectedAccountWithMeta, InjectedExtension } from "@polkadot/extension-inject/types";
-import { ApplicantProfile,IssuerProfile,Categories,Chains,AccountId} from "../contractTypes/ordumTypes";
+import { ApplicantProfile,IssuerProfile,Categories,Chains,AccountId, MemberRole, UserRole} from "../contractTypes/ordumTypes";
 import { ApiPromise } from "@polkadot/api";
 import { ContractPromise } from "@polkadot/api-contract";
 
@@ -40,8 +40,9 @@ export const createApplicantProfile = async(
     teamSize:number,
     description: string,
     allowedAccounts: Array<AccountId>|null,
-    categories: Array<Categories>
-    
+    categories: Array<Categories>,
+    members: Array<[AccountId,MemberRole]>|null,
+    role: UserRole
 ) =>{
 
     const Signer = signer.signer;
@@ -54,9 +55,11 @@ export const createApplicantProfile = async(
         teamSize,
         description,
         allowedAccounts,
-        categories
+        categories,
+        members,
+        role
     )
-    console.log("Data from query "+ data);
+    
     // Gas params
     const options = {
         gasLimit: (data.gasRequired as any).refTime,
@@ -71,7 +74,9 @@ export const createApplicantProfile = async(
         teamSize,
         description,
         allowedAccounts,
-        categories
+        categories,
+        members,
+        role
     );
 
    
@@ -93,6 +98,8 @@ export const createApplicantProfile = async(
     
 }
 
+
+
 // Grant Issuer Function 
 
 export const createIssuerProfile = async(
@@ -105,8 +112,10 @@ export const createIssuerProfile = async(
     chain: Chains,
     categories: Array<Categories>,
     description: string,
-    allowedAccounts:Array<AccountId>
-
+    mission: string,
+    members: Array<[AccountId,MemberRole]> |null,
+    allowedAccounts:Array<AccountId>,
+    role: UserRole
 ) =>{
 
     const Signer = signer.signer;
@@ -118,9 +127,12 @@ export const createIssuerProfile = async(
         chain,
         categories,
         description,
+        mission,
+        members,
         allowedAccounts,
+        role
     )
-    console.log("Data from query "+ data);
+    
     // Gas params
     const options = {
         gasLimit: (data.gasRequired as any).refTime,
@@ -134,7 +146,10 @@ export const createIssuerProfile = async(
         chain,
         categories,
         description,
+        mission,
+        members,
         allowedAccounts,
+        role
     );
     // Sign and Send
     //@ts-ignore

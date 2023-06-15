@@ -2,23 +2,48 @@
 
 import { useContext, useState } from "react";
 import Link from "next/link";
-// import { Link } from "react-router-dom";
 
-import SignUpContext from "@/store/signUpContext";
 import TeamMember from "./TeamMember";
+import ProfileContext from "@/store/profileContext";
+import { AccountId, MemberRole } from "@/lib/contractTypes/ordumTypes";
+
+
+export interface Member {
+  acc:AccountId,
+  role:MemberRole
+}
 
 const AddTeamMembers = () => {
-  const SignUpCtx = useContext(SignUpContext);
+   // Custom types
+  
+  const defaultMember:Member ={
+    acc:"",
+    role:MemberRole.regular
+  }
+
+  // Context
+  const ProfileCtx = useContext(ProfileContext);
+  //--------------------------------------------------
   const [teamMembers, setTeamMembers] = useState<number>(1);
-  const [arrayOfTeamMembers, setArrayOfTeamMembers] = useState<String[]>();
+  const [membersNRole, setMembersNRole] = useState<Array<[AccountId,MemberRole]>>([]);
+  const [members, setMembers] = useState<Member>(defaultMember)
+  
+
+  const addMember =(v:Member) =>{
+      setMembers({...members,...v})
+  }
+
 
   const addTeamMember = () => {
+    const memberData:[AccountId,MemberRole]= [members.acc,members.role]; 
+    setMembersNRole((prevData) => [...prevData,memberData])
+    setMembers(defaultMember)
     setTeamMembers(teamMembers + 1);
   };
-
-  // const removeTeamMember = () => {
-  //   setTeamMembers(teamMembers - 1)
-  // }
+  
+  // Contract Call for Crreating Profile
+  
+  
 
   return (
     <div className="font-space-grotesk grid h-screen place-items-center relative mb-20">
@@ -32,8 +57,9 @@ const AddTeamMembers = () => {
         <p className="">Member Wallet address</p>
         <ul>
           {[...Array(teamMembers)].map((e, i) => (
+            
             <li className="mb-2" key={i}>
-              <TeamMember />
+              <TeamMember member={membersNRole} key={i -1} setMember={addMember} />
             </li>
           ))}
         </ul>
@@ -45,11 +71,13 @@ const AddTeamMembers = () => {
         </button>
         <Link href="/dashboard">
           <button className="mt-4 border bg-black text-white w-full py-3 text-lg">
-            Save and close
+            Save and Done
           </button>
         </Link>
         <button className="mt-4 border bg-gray-400 text-white w-full py-3 text-lg">
+        <Link href="/createteamprofile">
           Back
+        </Link> 
         </button>
       </div>
     </div>

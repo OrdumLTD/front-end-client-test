@@ -23,12 +23,6 @@ const defaultState = {
 
 const ChainApiContext = createContext<ChainAPIContextInterface>(defaultState);
 
-// const ChainApiContext = createContext({
-//     //Variables and Functions
-//     api:ApiPromise,
-//     chainApiFunction: function():void{}
-    
-// })
 
 export const ChainAPIContextProvider = ({children}: Props ) =>{
     const [apiConnect, setApiConnect] = useState<ApiPromise>();

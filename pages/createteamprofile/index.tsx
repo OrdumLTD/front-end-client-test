@@ -3,23 +3,29 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 
-import SignUpContext from "@/store/signUpContext";
-
 import { Mail, GitHub } from "react-feather";
 import Discord from "../../assets/svg-icons/discord.svg";
 import Twitter from "../../assets/svg-icons/twitter-icon.svg";
 import Matrix from "../../assets/svg-icons/matrix.png";
 import Website from "../../assets/svg-icons/global.png";
 import { loadContract } from "@/lib/contractLoader";
+//Context
 import ContractContext from "@/store/contractContext";
+import ProfileContext from "@/store/profileContext";
 
 
 const CreateTeamPrifile = () => {
-  const SignUpCtx = useContext(SignUpContext);
+  // Context data
+  const ProfileCtx = useContext(ProfileContext);
   const ContractCtx = useContext(ContractContext);
+  console.log("Profile Team type "+ProfileCtx.profileData.teamType)
+  console.log("Profile User type "+ProfileCtx.profileData.userType)
+  // Custom data
 
-  const [teamType, setTeamType] = useState("Organization");
-  const [applicantType, setAppicantType] = useState("Applicant");
+
+
+  // Params
+  
 
   const contractLoading = async() =>{
     const apiContract = await loadContract().catch(err => console.log("Error Connecting Contract: "+err));
@@ -29,10 +35,9 @@ const CreateTeamPrifile = () => {
     }else{
       console.log("Didnt work connecting to contract")
     }
-    
-
   }
 
+ 
   useEffect(() =>{
     contractLoading()
     console.log("Helo Contract")
@@ -58,48 +63,52 @@ const CreateTeamPrifile = () => {
             <div className="mt-2 rounded bg-gray-200 py-2 flex space-around px-2">
               <button
                 className={
-                  teamType === "Organization"
+                  ProfileCtx.profileData.teamType === "Organization"
                     ? "border rounded w-40 bg-black py-3 px-8 text-white text-xs"
                     : "border rounded w-40 bg-gray-400 py-3 px-8 text-white text-xs"
                 }
-                onClick={() => setTeamType("Organization")}
+                //@ts-ignore
+                onClick={() => ProfileCtx.setProfile({teamType:"Organization"})}
               >
                 Organization
               </button>
               <button
                 className={
-                  teamType === "Individual"
+                  ProfileCtx.profileData.teamType === "Individual"
                     ? "border rounded w-40  ml-2 bg-black py-3 px-8 text-white text-xs"
                     : "border rounded w-40  ml-2 bg-gray-400 py-3 px-8 text-white text-xs"
                 }
-                onClick={() => setTeamType("Individual")}
+                //@ts-ignore
+                onClick={() => ProfileCtx.setProfile({teamType:"Individual"})}
               >
                 Individual
               </button>
             </div>
           </div>
           <div className="mt-8">
-            <h3>Are you a applicant or a foundation?</h3>
+            <h3>Are you an Applicant or a Grant Issuer?</h3>
             <div className="mt-2 rounded bg-gray-200 py-2 flex space-around px-2">
               <button
                 className={
-                  applicantType === "Applicant"
+                  ProfileCtx.profileData.userType === "Applicant"
                     ? "border rounded w-40 bg-black py-3 px-8 text-white text-xs"
                     : "border rounded w-40 bg-gray-400 py-3 px-8 text-white text-xs"
                 }
-                onClick={() => setAppicantType("Applicant")}
+                //@ts-ignore
+                onClick={() => ProfileCtx.setProfile({userType:"Applicant"})}
               >
                 Applicant
               </button>
               <button
                 className={
-                  applicantType === "Foundation"
+                  ProfileCtx.profileData.userType === "Grant Issuer"
                     ? "border rounded w-40  ml-2 bg-black py-3 px-8 text-white text-xs"
                     : "border rounded w-40  ml-2 bg-gray-400 py-3 px-8 text-white text-xs"
                 }
-                onClick={() => setAppicantType("Foundation")}
+                //@ts-ignore
+                onClick={() => ProfileCtx.setProfile({userType:"Grant Issuer"})}
               >
-                Foundation
+                Grant Issuer
               </button>
             </div>
           </div>
@@ -112,9 +121,10 @@ const CreateTeamPrifile = () => {
                 className="mt-2 w-full text-sm bg-white placeholder:font-italitc border border-black rounded py-2 pl-2 pr-4 focus:outline-none"
                 placeholder="What is the name of your team?"
                 type="text"
-                value={SignUpCtx?.teamName}
+                value={ProfileCtx.profileData.teamName}
                 onChange={(e) => {
-                  SignUpCtx.setName(e.target.value);
+                  //@ts-ignore
+                 ProfileCtx.setProfile({teamName:e.target.value})
                 }}
               />
             </div>
@@ -123,9 +133,10 @@ const CreateTeamPrifile = () => {
               <textarea
                 className="mt-2 w-full resize-none h-40 text-sm bg-white placeholder:font-italitc border border-black rounded focus:outline-none break-all"
                 placeholder="What is the name of your team?"
-                value={SignUpCtx?.description}
+                value={ProfileCtx.profileData.description}
                 onChange={(e) => {
-                  SignUpCtx.setDescription(e.target.value);
+                   //@ts-ignore
+                 ProfileCtx.setProfile({description:e.target.value})
                 }}
               />
             </div>
@@ -133,11 +144,13 @@ const CreateTeamPrifile = () => {
               <label>Project Type</label>
               <select
                 className="mt-2 w-full text-sm bg-white placeholder:font-italitc border border-black rounded py-2 pl-2 pr-4 focus:outline-none"
-                placeholder="Choole a category"
+                placeholder="Choose a category"
                 onChange={(e) => {
-                  SignUpCtx.setProjectType(e.target.value);
+                   //@ts-ignore
+                 ProfileCtx.setProfile({projectType:e.target.value})
                 }}
               >
+                {/* This should be a list and a fn adding the type to the list */}
                 <option value="" className="" disabled selected hidden>
                   Select your option
                 </option>
@@ -155,13 +168,36 @@ const CreateTeamPrifile = () => {
               </select>
             </div>
             <div className="mt-4 md:w-5/12">
+              <label>Resident Chain</label>
+              <select
+                className="mt-2 w-full text-sm bg-white placeholder:font-italitc border border-black rounded py-2 pl-2 pr-4 focus:outline-none"
+                placeholder="Choose a resident Chain"
+                onChange={(e) => {
+                   //@ts-ignore
+                 ProfileCtx.setProfile({residentChain:e.target.value})
+                }}
+              >
+                <option value="" className="" disabled selected hidden>
+                  Select your option
+                </option>
+                <option value="Polkadot">Governance</option>
+                <option value="Kusama">Defi</option>
+                <option value="Phala Network">Communication</option>
+                <option value="Moonbeam">Privacy</option>
+                <option value="Cosmos">Education</option>
+                <option value="Arweave">Events</option>
+               
+              </select>
+            </div>
+            <div className="mt-4 md:w-5/12">
               <label>Mission</label>
               <textarea
                 className="mt-2 w-full resize-none h-36 text-sm bg-white placeholder:font-italitc border border-black rounded focus:outline-none break-all"
                 placeholder="What does your team want to achieve?"
-                value={SignUpCtx?.mission}
+                value={ProfileCtx.profileData.mission}
                 onChange={(e) => {
-                  SignUpCtx.setMission(e.target.value);
+                   //@ts-ignore
+                 ProfileCtx.setProfile({mission:e.target.value})
                 }}
               />
             </div>
@@ -220,7 +256,7 @@ const CreateTeamPrifile = () => {
 
             <Link href="/addteammembers">
               <button className="mt-10 py-3 border bg-black text-white w-full text-lg mb-20">
-                Save and close
+                Save and Next
               </button>
             </Link>
           </div>

@@ -1,4 +1,4 @@
-import { AccountId, MemberRole } from "@/lib/contractTypes/ordumTypes";
+import { AccountId, Categories, MemberRole } from "@/lib/contractTypes/ordumTypes";
 import React, { createContext, useState, ReactNode, Dispatch } from "react";
 
 
@@ -6,15 +6,16 @@ type Props = {
   children: ReactNode;
 };
 
-interface createProfileData{
+export interface createProfileData{
   teamType:string,
   userType:string,
   teamName: string;
   description: string;
   mission: string;
-  projectType: string;
+  projectType: Categories[];
   residentChain:string,
-  teamMembers?: Array<[AccountId,MemberRole]>;
+  teamMembers: Array<[AccountId,MemberRole]>|null;
+  allowedAccounts:Array<AccountId>|null
 }
 
 const defaultProfileData:createProfileData ={
@@ -23,9 +24,10 @@ const defaultProfileData:createProfileData ={
   teamName:"",
   description:"",
   mission:"",
-  projectType:"",
+  projectType:[],
   residentChain:"",
-  teamMembers:undefined
+  teamMembers:null,
+  allowedAccounts:null
 }
 
 interface createProfile {

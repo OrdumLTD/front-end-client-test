@@ -3,12 +3,14 @@ import type BN from 'bn.js';
 export enum Categories {
 	publicGood = 'PublicGood',
 	infrastructure = 'Infrastructure',
-	mediaArt = 'MediaArt'
+	mediaArt = 'MediaArt',
+	governance = 'Governance',
+	gameFi = 'GameFi'
 }
 
 export enum UserRole {
 	applicant = 'Applicant',
-	foundation = 'Foundation'
+	foundation = 'Grant Issuer'
 }
 
 export enum MemberRole {

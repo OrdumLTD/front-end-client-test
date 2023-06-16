@@ -1,6 +1,6 @@
 import { CertificateData, signCertificate } from "@phala/sdk";
 import type { InjectedAccountWithMeta, InjectedExtension } from "@polkadot/extension-inject/types";
-import { ApplicantProfile,IssuerProfile,Categories,Chains,AccountId, MemberRole, UserRole} from "../contractTypes/ordumTypes";
+import { Categories,Chains,AccountId, MemberRole, UserRole} from "../contractTypes/ordumTypes";
 import { ApiPromise } from "@polkadot/api";
 import { ContractPromise } from "@polkadot/api-contract";
 
@@ -37,7 +37,6 @@ export const createApplicantProfile = async(
     //Pure params
     name: string,
     accountId:AccountId,
-    teamSize:number,
     description: string,
     allowedAccounts: Array<AccountId>|null,
     categories: Array<Categories>,
@@ -52,7 +51,6 @@ export const createApplicantProfile = async(
         {},
         name,
         accountId,
-        teamSize,
         description,
         allowedAccounts,
         categories,
@@ -71,7 +69,6 @@ export const createApplicantProfile = async(
         options,
         name,
         accountId,
-        teamSize,
         description,
         allowedAccounts,
         categories,

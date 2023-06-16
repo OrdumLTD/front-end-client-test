@@ -1,6 +1,6 @@
 {
   "source": {
-    "hash": "0x1442909f50d15b3b5280065454d40fa68f67583e713819f2af5e1c164a4b10b1",
+    "hash": "0x8e212480b4088362c6c0065b5a35d4b76ad15c44bc57ced21abf795907db1148",
     "language": "ink! 4.0.0",
     "compiler": "rustc 1.68.0",
     "build_info": {
@@ -247,15 +247,6 @@
                 "Option"
               ],
               "type": 39
-            }
-          },
-          {
-            "label": "team_size",
-            "type": {
-              "displayName": [
-                "u8"
-              ],
-              "type": 10
             }
           },
           {
@@ -695,15 +686,6 @@
                             }
                           },
                           "name": "name"
-                        },
-                        {
-                          "layout": {
-                            "leaf": {
-                              "key": "0xeed67be1",
-                              "ty": 10
-                            }
-                          },
-                          "name": "team_size"
                         },
                         {
                           "layout": {
@@ -1264,11 +1246,6 @@
                 "name": "name",
                 "type": 0,
                 "typeName": "String"
-              },
-              {
-                "name": "team_size",
-                "type": 10,
-                "typeName": "u8"
               },
               {
                 "name": "account_id",

@@ -50,7 +50,7 @@ const SubmitPropolsalPreview: React.FC<Props> = (props) => {
     if(WalletCtx.wallet){
       setWallet(WalletCtx.wallet)
     }
-    if(submitCtx.tldr.fundingAmount && submitCtx.tldr.recieveDate){
+    if(submitCtx?.tldr?.fundingAmount && submitCtx.tldr.recieveDate){
 
       await PreimageAndReferendum(
         fetchIndex,
@@ -62,28 +62,30 @@ const SubmitPropolsalPreview: React.FC<Props> = (props) => {
         submitCtx?.tldr.recieveDate
         )
     }else{
-      console.log("Missing some field")
+      <div>
+        <h3>Missing Some fields</h3>
+      </div>
     }
    
   };
 
   return (
     <div className="xl:ml-48 2xl:ml-60 p-10">
-      <div className="max-w-[33rem] flex flex-col">
-        Preview
+      <div className="max-w-[48rem] flex flex-col">
         {/* Context */}
         <div className="mt-10 ">
           <OrdumPreview
-            teamName={submitCtx.tldr.teamName}
-            propolsalName={submitCtx.tldr.propolsalName}
-            date={submitCtx.tldr.recieveDate}
-            fundingAmount={submitCtx.tldr.fundingAmount}
-            deadline={submitCtx.tldr.deadLine}
-            startDate={submitCtx.tldr.startingDate}
-            propolsalDescription={submitCtx.tldr.shortDescription}
-            problem={submitCtx.tldr.shortDescription}
-            solution={submitCtx.context.goal}
-            ifYouHaveSeenSimilar={submitCtx.tldr.whyDifferentDescription}
+            teamName={submitCtx.tldr?.teamName}
+            propolsalName={submitCtx.tldr?.propolsalName}
+            date={submitCtx.tldr?.recieveDate}
+            fundingAmount={submitCtx.tldr?.fundingAmount}
+            deadline={submitCtx.tldr?.deadLine}
+            startDate={submitCtx.tldr?.startingDate}
+            propolsalDescription={submitCtx.tldr?.shortDescription}
+            problem={submitCtx.tldr?.shortDescription}
+            solution={submitCtx.context?.goal}
+            ifYouHaveSeenSimilar={submitCtx.tldr?.whyDifferentDescription}
+            govType={submitCtx.tldr?.projectType}
           />
           <h3>Index: {submitCtx?.proposalIndex}</h3>
         </div>

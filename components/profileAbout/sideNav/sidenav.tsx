@@ -38,18 +38,6 @@ export default function Sidenav() {
       </div>
       <div className="mt-4">
         <div className="flex flex-col gap-2">
-          <span className="text-sm font-bold">Certificates</span>
-          <span className="text-xs">Nothig here yet.</span>
-        </div>
-      </div>
-      <div className="mt-4">
-        <div className="flex flex-col gap-2">
-          <span className="text-sm font-bold">No of delivries</span>
-          <span className="text-xs">Nothig here yet.</span>
-        </div>
-      </div>
-      <div className="mt-4">
-        <div className="flex flex-col gap-2">
           <span className="text-sm font-bold">No of application</span>
           <span className="text-xs">Nothig here yet.</span>
         </div>

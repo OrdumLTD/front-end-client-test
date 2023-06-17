@@ -11,7 +11,7 @@ export const createApi = async (endpoint: string): Promise<ApiPromise> => {
       ...khalaDev,
       ...phalaSDKTypes,
     },
-  });
-
+  })
+  console.log("Done connecting to RPC")
   return api;
 };

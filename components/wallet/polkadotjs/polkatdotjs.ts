@@ -13,6 +13,7 @@ let enablePolkadotExtensionCache: Promise<void>;
     const extensions = await web3Enable("Ordum");
 
     if (extensions.length === 0) {
+      // Handle Wallet-less onboarding
       throw new Error(
         "No extension installed, or the user did not accept the authorization"
       );

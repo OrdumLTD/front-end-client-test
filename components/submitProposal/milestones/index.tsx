@@ -36,9 +36,9 @@ useEffect(()=>{
   };
 
   return (
-    <div className="p-10">
+    <div className="xl:ml-48 2xl:ml-60 px-10">
       <div className="max-w-[33rem] flex flex-col">
-        <h1 className="text-4xl xl:text-6xl font-medium">Submit Proposal</h1>
+
 
         <h2 className="mt-8 text-4xl">5. Milestones</h2>
 
@@ -159,7 +159,7 @@ useEffect(()=>{
           {/* Button Row - take one level up */}
 
           {/* ToDo Indexing on the menu show Context, even after weswitch to Problem Solution */}
-          <div className="xl:ml-48 2xl:ml-60 flex flex-col gap-4">
+          <div className="mt-12 mb-20 flex flex-col gap-4">
             <button
               className="bg-black text-white py-2 md:py-4"
               onClick={() =>

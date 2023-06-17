@@ -1,6 +1,6 @@
 import { CertificateData, signCertificate } from "@phala/sdk";
 import type { InjectedAccountWithMeta, InjectedExtension } from "@polkadot/extension-inject/types";
-import { ApplicantProfile,IssuerProfile,Categories,Chains,AccountId} from "../contractTypes/ordumTypes";
+import { Categories,Chains,AccountId, MemberRole, UserRole} from "../contractTypes/ordumTypes";
 import { ApiPromise } from "@polkadot/api";
 import { ContractPromise } from "@polkadot/api-contract";
 
@@ -19,6 +19,7 @@ export const onSignCertificate = async(
 
     return certificateCache = (async() =>{
         certificate = await signCertificate({
+            //@ts-ignore // Pjs Api version later that 9.14.2 is kinda not compatible
             api,
             signer:signer.signer,
             //@ts-ignore
@@ -36,11 +37,11 @@ export const createApplicantProfile = async(
     //Pure params
     name: string,
     accountId:AccountId,
-    teamSize:number,
     description: string,
     allowedAccounts: Array<AccountId>|null,
-    categories: Array<Categories>
-
+    categories: Array<Categories>,
+    members: Array<[AccountId,MemberRole]>|null,
+    role: UserRole
 ) =>{
 
     const Signer = signer.signer;
@@ -50,12 +51,13 @@ export const createApplicantProfile = async(
         {},
         name,
         accountId,
-        teamSize,
         description,
         allowedAccounts,
-        categories
+        categories,
+        members,
+        role
     )
-    console.log("Data from query "+ data);
+    
     // Gas params
     const options = {
         gasLimit: (data.gasRequired as any).refTime,
@@ -67,12 +69,16 @@ export const createApplicantProfile = async(
         options,
         name,
         accountId,
-        teamSize,
         description,
         allowedAccounts,
-        categories
+        categories,
+        members,
+        role
     );
+
+   
     // Sign and Send
+    //@ts-ignore
     txnData.signAndSend(account.address,{signer:Signer},({isInBlock,events,isCompleted,isFinalized})=>{
         if(isInBlock){
             console.log("In Block")
@@ -89,6 +95,8 @@ export const createApplicantProfile = async(
     
 }
 
+
+
 // Grant Issuer Function 
 
 export const createIssuerProfile = async(
@@ -101,8 +109,10 @@ export const createIssuerProfile = async(
     chain: Chains,
     categories: Array<Categories>,
     description: string,
-    allowedAccounts:Array<AccountId>
-
+    mission: string,
+    members: Array<[AccountId,MemberRole]> |null,
+    allowedAccounts:Array<AccountId>,
+    role: UserRole
 ) =>{
 
     const Signer = signer.signer;
@@ -114,9 +124,12 @@ export const createIssuerProfile = async(
         chain,
         categories,
         description,
+        mission,
+        members,
         allowedAccounts,
+        role
     )
-    console.log("Data from query "+ data);
+    
     // Gas params
     const options = {
         gasLimit: (data.gasRequired as any).refTime,
@@ -130,9 +143,13 @@ export const createIssuerProfile = async(
         chain,
         categories,
         description,
+        mission,
+        members,
         allowedAccounts,
+        role
     );
     // Sign and Send
+    //@ts-ignore
     txnData.signAndSend(account.address,{signer:Signer},({isInBlock,events,isCompleted,isFinalized})=>{
         if(isInBlock){
             console.log("In Block")

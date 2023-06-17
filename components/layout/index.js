@@ -9,6 +9,8 @@ import '@polkadot/api-augment/kusama';
 // Connect to the chain Api in the Home page
 
 //1. test queries
+import { useRouter } from 'next/router';
+
 
 export default function Layout(props) {
   const ChainAPICtx = useContext(ChainApiContext);
@@ -16,6 +18,15 @@ export default function Layout(props) {
   useEffect(()=>{
     ChainAPICtx.fetchChainApi()
   },[])
+
+  
+  const router = useRouter();
+  if(router.pathname === "/"){
+    router.push("/dashboard")
+  }else{
+    console.log("NotHome")
+  }
+  console.log(router.pathname)
 
   return (
     <main className="flex flex-col h-screen ">

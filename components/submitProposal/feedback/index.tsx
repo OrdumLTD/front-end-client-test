@@ -40,9 +40,9 @@ const SubmitPropolsalFeedback: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="xl:ml-48 2xl:ml-60 p-10">
+    <div className="xl:ml-48 2xl:ml-60 px-10">
       <div className="max-w-[33rem] flex flex-col">
-        <h1 className="text-4xl xl:text-6xl font-medium">Submit Proposal</h1>
+
 
         <h2 className="mt-8 text-4xl">7. Feedback</h2>
         <div className="mt-4">
@@ -69,7 +69,7 @@ const SubmitPropolsalFeedback: React.FC<Props> = (props) => {
           <div className="mt-10 flex flex-col gap-4">
             <button
               className="bg-black text-white py-2 md:py-4"
-              onClick={() => propose()}
+              //onClick={() => ()}
             >
               Submit Discussion
             </button>

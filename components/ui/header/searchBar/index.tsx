@@ -1,10 +1,10 @@
-import SearchIcon from "../../../../assets/svg-icons/search-icon.svg";
+import SearchIcon from "@/assets/svg-icons/search-icon.svg";
 import Image from "next/image"
 
 function SearchBar() {
   return (
     <div className="xl:w-80 -mt-1">
-      <form>
+      <div>
         <label className="relative block">
           <span className="absolute inset-y-0 left-0 flex items-center pl-3">
             <Image src={SearchIcon} alt="Search lense" />
@@ -15,7 +15,7 @@ function SearchBar() {
             type="text"
           />
         </label>
-      </form>
+      </div>
     </div>
   );
 }

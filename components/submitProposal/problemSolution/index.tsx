@@ -22,9 +22,8 @@ const SubmitPropolsalProblemSolution: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="xl:ml-48 2xl:ml-60  p-10">
+    <div className="xl:ml-48 2xl:ml-60  px-10">
       <div className="max-w-[33rem] flex flex-col">
-        <h1 className="text-4xl xl:text-6xl font-medium">Submit Proposal</h1>
 
         <h2 className="mt-8 text-2xl xl:text-4xl">3. Problem Solution</h2>
 
@@ -53,7 +52,7 @@ const SubmitPropolsalProblemSolution: React.FC<Props> = (props) => {
             className="mt-2 w-full text-sm bg-white placeholder:font-italitc placeholder:text-xs border border-black rounded
              py-2 pl-2 pr-4 focus:outline-none resize-none min-h-[10rem]"
             placeholder="What is the poing of life (42?)"
-            value={problemCtx.problem}
+            value={problemCtx?.problem}
             onChange={(e) => {
               changeProblemSolution({ problem: e.target.value });
             }}

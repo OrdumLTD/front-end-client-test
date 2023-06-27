@@ -47,7 +47,7 @@ export const SignUpConnect = () => {
     const { web3Accounts } = await import("@polkadot/extension-dapp");
     const allAccounts: InjectedAccountWithMeta[] | undefined =
       await web3Accounts();
-    setSelectedAcc(allAccounts[0]);
+    
     setState({
       loading: false,
       error: null,
@@ -82,9 +82,14 @@ export const SignUpConnect = () => {
         {walletCtx.accounts?.map((account) => (
           <option
             key={account.address}
-            onClick={() => {
+            onChange={async() => {
+              const { web3FromSource } = await import("@polkadot/extension-dapp");
               console.log("Click");
-              setSelectedAcc(account);
+              walletCtx.selectAccount(account);
+              //@ts-ignore
+              const injector = await web3FromSource(walletCtx?.selectedAccount?.meta.source);
+              walletCtx.getWallet(injector);
+              console.log(walletCtx?.selectedAccount?.meta.name);
               // walletCtx.selectAccount(account);
             }}
           >
@@ -92,16 +97,6 @@ export const SignUpConnect = () => {
           </option>
         ))}
       </select>
-      <button
-        className=" mt-2 border border-black p-0.5"
-        onClick={() => {
-          walletCtx.selectAccount(selectedAcc);
-          console.log(walletCtx?.selectedAccount?.meta.name);
-          router.push("/createteamprofile");
-        }}
-      >
-        Use this account
-      </button>
     </div>
   ) : (
     <button disabled={state.loading} onClick={handleConnect}>

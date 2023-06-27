@@ -1,10 +1,21 @@
 import { Connect } from "@/components/wallet/polkadotjs/connect";
 import { SignUpConnect } from "@/components/wallet/polkadotjs/signUpConnect";
+import { onSignCertificate } from "@/lib/ContractFns/createProfile";
+import ChainApiContext from "@/store/apiContext";
+import ContractContext from "@/store/contractContext";
+import WalletContext from "@/store/walletContext";
+import { Button } from "@mui/material";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useContext, useEffect } from "react";
 
 // /createteamprofile
 
 const SignUpWallet = () => {
+  const router = useRouter();
+  const WalletCtx = useContext(WalletContext);
+  const ContractCtx = useContext(ContractContext);
+  const ChainApiCtx = useContext(ChainApiContext);
   // const { user } = useSelector((state: RootState) => state.user);
   // const dispatch = useDispatch()
 
@@ -13,6 +24,9 @@ const SignUpWallet = () => {
   // } 
   
   // Connect the contract
+  useEffect(()=>{
+    ChainApiCtx.fetchPoc5Api();
+  },[])
 
   return (
     <div className="font-space-grotesk grid h-screen place-items-center">
@@ -25,7 +39,42 @@ const SignUpWallet = () => {
         <div className="my-1 md:my-2"></div>
         <Link href="/createteamprofil"><button className="w-60 border border-gray-400 hover:bg-gray-200 py-2.5">Wallet 3</button></Link> */}
 
-       <SignUpConnect />
+       <Connect/>
+       {
+          WalletCtx.selectedAccount && ChainApiCtx.poc5 &&WalletCtx.wallet ? 
+          (<Button
+            variant="outlined"
+            size="small"   
+              className=" mt-2 border border-black p-0.5"
+              
+              onClick={async() => {
+                const certData = await onSignCertificate(
+                  //@ts-ignore
+                  ChainApiCtx.poc5,
+                  WalletCtx.wallet,
+                  WalletCtx.selectedAccount
+                  );
+                ContractCtx.signCert(certData)  
+                router.push("/createteamprofile");
+              }}
+          >
+            Sign Up
+          </Button>)
+          :
+          (
+            <Button
+              variant="outlined"
+              size="small"   
+              disabled
+              className=" mt-2 border border-black p-0.5"
+              onClick={() => {
+                router.push("/createteamprofile");
+              }}
+            >
+             Sign Up
+           </Button>)
+        }
+       
       </div>
       {/* <div className="-mt-80 flex flex-col">
         <h2 className="md:text-5xl mb-10">New To Blockchain? Create Wallet</h2>

@@ -1,8 +1,10 @@
-import { CertificateData, signCertificate } from "@phala/sdk";
+import { CertificateData} from "@phala/sdk";
 import type { InjectedAccountWithMeta, InjectedExtension } from "@polkadot/extension-inject/types";
 import { Categories,Chains,AccountId, MemberRole, UserRole} from "../contractTypes/ordumTypes";
 import { ApiPromise } from "@polkadot/api";
 import { ContractPromise } from "@polkadot/api-contract";
+import { signCertificate } from "../phala";
+
 
 // Main logic for caching and context state
 export let certificateCache: Promise<CertificateData>;
@@ -21,6 +23,7 @@ export const onSignCertificate = async(
         certificate = await signCertificate({
             //@ts-ignore // Pjs Api version later that 9.14.2 is kinda not compatible
             api,
+            //@ts-ignore
             signer:signer.signer,
             //@ts-ignore
             account:account
